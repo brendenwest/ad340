@@ -60,10 +60,11 @@ TK
 
 Resources
 ----
-https://developer.android.com/develop/index.html 
-https://www.tutorialspoint.com/android/ 
-http://www.vogella.com/tutorials/Android/article.html
-https://www.tutorialspoint.com/java  
+
+- https://developer.android.com/develop/index.html 
+- https://www.tutorialspoint.com/android/ 
+- http://www.vogella.com/tutorials/Android/article.html
+- https://www.tutorialspoint.com/java  
 	
 						
 **Note:** Seattle Public Library provides free access to many technical reference books at: https://ezproxy.spl.org/login?url=http://proquestcombo.safaribooksonline.com/?uicode=spl 
