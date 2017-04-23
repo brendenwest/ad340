@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AD 340</string>
+    <string name="action_settings">Settings</string>
+    <string name="edit_message">enter name</string>
+    <string name="button_info">Info</string>
+    <string name="demo_list_header">Demos</string>
+    <string name="title_activity_recycler">RecyclerActivity</string>
+    <string name="title_activity_list">ListActivity</string>
+</resources>
