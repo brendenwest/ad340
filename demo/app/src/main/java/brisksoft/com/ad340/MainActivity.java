@@ -67,8 +67,12 @@ public class MainActivity extends AppCompatActivity {
     public void showDemo(int id) {
         switch (id) {
             case 0:
-                Intent intent = new Intent(this, ListActivity.class);
-                startActivity(intent);
+                Intent intentL = new Intent(this, ListActivity.class);
+                startActivity(intentL);
+                break;
+            case 2:
+                Intent intentR = new Intent(this, RecyclerActivity.class);
+                startActivity(intentR);
                 break;
             default:
                 Toast.makeText(MainActivity.this, "" + id,

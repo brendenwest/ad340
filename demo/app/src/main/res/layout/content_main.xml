@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:layout_constraintTop_toBottomOf="@id/toolbar"
     tools:context="brisksoft.com.ad340.MainActivity"
     tools:showIn="@layout/activity_main">
 
@@ -12,25 +13,25 @@
         android:id="@+id/editText"
         android:layout_width="163dp"
         android:layout_height="53dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/edit_message"
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="37dp"
+        android:layout_marginStart="37dp"
         android:onClick="sendMessage"
         android:text="@string/button_info"
         app:layout_constraintBaseline_toBaselineOf="@+id/editText"
-        app:layout_constraintLeft_toRightOf="@+id/editText"
-        android:layout_marginStart="37dp" />
+        app:layout_constraintLeft_toRightOf="@+id/editText" />
 
     <TextView
         android:id="@+id/grid_header"

@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context="brisksoft.com.ad340.DetailActivity">
 
+    <include layout="@layout/toolbar" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="129dp"
@@ -16,6 +18,6 @@
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:layout_editor_absoluteX="106dp" />
 </android.support.constraint.ConstraintLayout>
