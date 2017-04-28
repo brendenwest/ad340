@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    app:layout_constraintTop_toBottomOf="@id/toolbar"
+    android:layout_marginTop="?attr/actionBarSize"
     tools:context="brisksoft.com.ad340.MainActivity"
     tools:showIn="@layout/activity_main">
 

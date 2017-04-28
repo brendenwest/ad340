@@ -12,12 +12,12 @@
         android:id="@+id/textView"
         android:layout_width="129dp"
         android:layout_height="29dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="?attr/actionBarSize"
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="parent"
         tools:layout_editor_absoluteX="106dp" />
 </android.support.constraint.ConstraintLayout>
