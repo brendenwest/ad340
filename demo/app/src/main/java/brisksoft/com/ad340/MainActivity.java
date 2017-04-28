@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     // Array of strings...
-    String[] demoArray = {"list", "List w/ cursor", "RecyclerView", "WebView" };
+    String[] demoArray = {"listView", "List w/ cursor", "RecyclerView", "WebView" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,24 +61,6 @@ public class MainActivity extends AppCompatActivity {
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
-    }
-
-    /** Called when the user taps a grid button */
-    public void showDemo(int id) {
-        switch (id) {
-            case 0:
-                Intent intentL = new Intent(this, ListActivity.class);
-                startActivity(intentL);
-                break;
-            case 2:
-                Intent intentR = new Intent(this, RecyclerActivity.class);
-                startActivity(intentR);
-                break;
-            default:
-                Toast.makeText(MainActivity.this, "" + id,
-                        Toast.LENGTH_SHORT).show();
-                break;
-        }
     }
 
     @Override
@@ -134,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
             button.setText(demoArray[position]);
             button.setId(position);
-            button.setOnClickListener(new BtnOnClickListener(position));
+            button.setOnClickListener(new BtnOnClickListener());
             return button;
         }
 
@@ -142,17 +124,27 @@ public class MainActivity extends AppCompatActivity {
 
     class BtnOnClickListener implements View.OnClickListener
     {
-        private final int position;
-
-        public BtnOnClickListener(int position)
-        {
-            this.position = position;
-        }
 
         public void onClick(View v)
         {
             Log.d(TAG, "tapped button");
-            showDemo(v.getId());
+            int id = v.getId();
+            switch (id) {
+                case 0:
+                    Intent intentL = new Intent(getBaseContext(), ListActivity.class);
+                    startActivity(intentL);
+                    break;
+                case 2:
+                    Intent intentR = new Intent(getBaseContext(), RecyclerActivity.class);
+                    startActivity(intentR);
+                    break;
+                default:
+                    Button b = (Button) v;
+                    String label = b.getText().toString();
+                    Toast.makeText(MainActivity.this, label,
+                            Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
     }
 }
