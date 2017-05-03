@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ButtonAdapter(this));
 
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,10 +70,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
+        if (id == R.id.action_about) {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+            return true;
+        }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {

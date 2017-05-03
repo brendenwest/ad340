@@ -1,12 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="brisksoft.com.myapplication.MainActivity">
-    <!-- Settings, should always be in the overflow -->
-    <item android:id="@+id/action_about"
-        android:title="@string/action_about"
-        app:showAsAction="never"/>
-
+    tools:context="brisksoft.com.ad340.AboutActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
