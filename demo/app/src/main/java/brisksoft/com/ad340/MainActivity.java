@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     // Array of strings...
-    String[] demoArray = {"listView", "List w/ cursor", "RecyclerView", "WebView" };
+    String[] demoArray = {"listView", "RecyclerView", "RecyclerView Web", "WebView" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,14 +130,19 @@ public class MainActivity extends AppCompatActivity {
         {
             Log.d(TAG, "tapped button");
             int id = v.getId();
+            Intent intent;
             switch (id) {
                 case 0:
-                    Intent intentL = new Intent(getBaseContext(), ListActivity.class);
-                    startActivity(intentL);
+                    intent = new Intent(getBaseContext(), ListActivity.class);
+                    startActivity(intent);
+                    break;
+                case 1:
+                    intent = new Intent(getBaseContext(), RecyclerActivity.class);
+                    startActivity(intent);
                     break;
                 case 2:
-                    Intent intentR = new Intent(getBaseContext(), RecyclerActivity.class);
-                    startActivity(intentR);
+                    intent = new Intent(getBaseContext(), RecyclerWebActivity.class);
+                    startActivity(intent);
                     break;
                 default:
                     Button b = (Button) v;

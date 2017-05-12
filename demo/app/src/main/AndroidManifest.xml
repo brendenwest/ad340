@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="brisksoft.com.ad340">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,6 +24,10 @@
         <activity
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".RecyclerWebActivity"
+            android:label= "@string/title_activity_recycler_web"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".RecyclerActivity"
