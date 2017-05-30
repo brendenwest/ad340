@@ -15,8 +15,7 @@
         android:layout_marginTop="?attr/actionBarSize"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        tools:layout_editor_absoluteX="8dp">
+        app:layout_constraintTop_toBottomOf="parent">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -27,14 +26,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
                 android:paddingRight="20dp"
                 android:text="@string/label_latitude"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-        <TextView
-            android:id="@+id/textLatitude"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textLatitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
@@ -46,14 +47,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
                 android:paddingRight="20dp"
                 android:text="@string/label_longitude"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-        <TextView
-            android:id="@+id/textLongitude"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textLongitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
@@ -65,9 +68,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
                 android:paddingRight="20dp"
                 android:text="@string/label_location"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
             <TextView
                 android:id="@+id/textLocation"
                 android:layout_width="wrap_content"
