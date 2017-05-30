@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     // Array of strings...
-    String[] demoArray = {"listView", "RecyclerView", "RecyclerView Web", "WebView" };
+    String[] demoArray = {"listView", "RecyclerView", "RecyclerView Web", "Chat", "Map" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +142,14 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 2:
                     intent = new Intent(getBaseContext(), RecyclerWebActivity.class);
+                    startActivity(intent);
+                    break;
+                case 3:
+                    intent = new Intent(getBaseContext(), ChatActivity.class);
+                    startActivity(intent);
+                    break;
+                case 4:
+                    intent = new Intent(getBaseContext(), MapActivity.class);
                     startActivity(intent);
                     break;
                 default:

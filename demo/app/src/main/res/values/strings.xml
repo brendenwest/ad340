@@ -4,10 +4,22 @@
     <string name="action_about">About</string>
     <string name="edit_message">enter name</string>
     <string name="button_info">Info</string>
+    <string name="button_add">Add</string>
+    <string name="label_latitude">Latitude</string>
+    <string name="label_longitude">Longitude</string>
+    <string name="label_location">Location</string>
+    <string name="no_location_data">No Location Data</string>
+    <string name="service_not_available">Service unavailable</string>
+    <string name="address_found">Address found</string>
+    <string name="no_address_found">No address found</string>
+    <string name="invalid_lat_long_used">Invalid Lat/Long</string>
     <string name="demo_list_header">Demos</string>
     <string name="title_activity_detail">Detail</string>
     <string name="title_activity_recycler">RecyclerView</string>
     <string name="title_activity_recycler_web">RecyclerView from web</string>
     <string name="title_activity_list">ListView</string>
     <string name="title_activity_about">About</string>
+    <string name="title_activity_chat">Chat</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_fetch_address_intent_service">FetchAddressIntentService</string>
 </resources>
