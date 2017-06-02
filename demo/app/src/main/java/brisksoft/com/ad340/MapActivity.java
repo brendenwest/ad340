@@ -84,6 +84,8 @@ public class MapActivity extends AppCompatActivity implements ConnectionCallback
         }
 
         if (mLastLocation != null) {
+            Log.d("LOCATION", mLastLocation.toString());
+
             setMap();
             if (mAddressRequested) {
                 startIntentService();
@@ -97,14 +99,15 @@ public class MapActivity extends AppCompatActivity implements ConnectionCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        // store map object for use once location is available
         mMap = googleMap;
     }
 
     public void setMap() {
         LatLng myLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-        mMap.setMinZoomPreference(10);
+        mMap.setMinZoomPreference(10); // zoom to city level
         mMap.addMarker(new MarkerOptions().position(myLocation)
-                .title("Marker in Sydney"));
+                .title("My current location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
 
     }
