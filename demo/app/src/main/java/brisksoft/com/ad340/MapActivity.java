@@ -1,6 +1,5 @@
 package brisksoft.com.ad340;
 
-import android.*;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -30,16 +29,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapActivity extends AppCompatActivity implements ConnectionCallbacks, OnMapReadyCallback, OnConnectionFailedListener {
 
-    final static int REQUEST_LOCATION = 9;
-
-    protected static final String ADDRESS_REQUESTED_KEY = "address-request-pending";
-    protected static final String LOCATION_ADDRESS_KEY = "location-address";
-
-
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
     private GoogleMap mMap;
 
+    private final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 9;
     protected boolean mAddressRequested;
     protected String mAddressOutput;
 
@@ -81,20 +75,58 @@ public class MapActivity extends AppCompatActivity implements ConnectionCallback
                 ==PackageManager.PERMISSION_GRANTED){
             mLastLocation =
                     LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        } else {
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+
+                // MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
         }
 
         if (mLastLocation != null) {
-            Log.d("LOCATION", mLastLocation.toString());
-
-            setMap();
-            if (mAddressRequested) {
-                startIntentService();
-            }
-
-            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+            showLocation();
         }
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    showLocation();
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 
     @Override
@@ -103,7 +135,16 @@ public class MapActivity extends AppCompatActivity implements ConnectionCallback
         mMap = googleMap;
     }
 
-    public void setMap() {
+    public void showLocation() {
+
+        // initiate geocode request
+        if (mAddressRequested) {
+            startIntentService();
+        }
+
+        mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+        mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+
         LatLng myLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         mMap.setMinZoomPreference(10); // zoom to city level
         mMap.addMarker(new MarkerOptions().position(myLocation)
@@ -111,7 +152,6 @@ public class MapActivity extends AppCompatActivity implements ConnectionCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
 
     }
-
 
     /**
      * Shows a toast with the given text.
@@ -122,7 +162,6 @@ public class MapActivity extends AppCompatActivity implements ConnectionCallback
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
-        Log.d("LOCATION", "connection failed: ");
         showToast("Connection failed.");
     }
 
