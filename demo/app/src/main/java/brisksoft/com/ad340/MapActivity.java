@@ -18,6 +18,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,9 +29,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapActivity extends AppCompatActivity implements ConnectionCallbacks, OnMapReadyCallback, OnConnectionFailedListener {
+public class MapActivity extends AppCompatActivity implements ConnectionCallbacks, OnMapReadyCallback, OnConnectionFailedListener, LocationListener {
 
     private GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLocationRequest;
     private Location mLastLocation;
     private GoogleMap mMap;
 
@@ -66,6 +69,7 @@ public class MapActivity extends AppCompatActivity implements ConnectionCallback
 
         // connect to google services
         createGoogleApiClient();
+        createLocationRequest();
 
     }
 
@@ -75,6 +79,7 @@ public class MapActivity extends AppCompatActivity implements ConnectionCallback
                 ==PackageManager.PERMISSION_GRANTED){
             mLastLocation =
                     LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            updateUI();
         } else {
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
@@ -98,10 +103,6 @@ public class MapActivity extends AppCompatActivity implements ConnectionCallback
             }
         }
 
-        if (mLastLocation != null) {
-            showLocation();
-        }
-
     }
 
     @Override
@@ -113,8 +114,8 @@ public class MapActivity extends AppCompatActivity implements ConnectionCallback
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    showLocation();
+                    // location-related task you need to do.
+                    updateUI();
 
                 } else {
 
@@ -135,22 +136,26 @@ public class MapActivity extends AppCompatActivity implements ConnectionCallback
         mMap = googleMap;
     }
 
-    public void showLocation() {
+    public void updateUI() {
+        if (mLastLocation == null) {
+            // get location updates
+            startLocationUpdates();
+        } else {
 
-        // initiate geocode request
-        if (mAddressRequested) {
-            startIntentService();
+            // initiate geocode request
+            if (mAddressRequested) {
+                startIntentService();
+            }
+
+            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+
+            LatLng myLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            mMap.setMinZoomPreference(10); // zoom to city level
+            mMap.addMarker(new MarkerOptions().position(myLocation)
+                    .title("My current location"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
         }
-
-        mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-        mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
-
-        LatLng myLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-        mMap.setMinZoomPreference(10); // zoom to city level
-        mMap.addMarker(new MarkerOptions().position(myLocation)
-                .title("My current location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
-
     }
 
     /**
@@ -183,6 +188,27 @@ public class MapActivity extends AppCompatActivity implements ConnectionCallback
                     .addApi(LocationServices.API)
                     .build();
         }
+    }
+
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+    }
+
+    protected void startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                ==PackageManager.PERMISSION_GRANTED) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                    mGoogleApiClient, mLocationRequest, this);
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        mLastLocation = location;
+        updateUI();
     }
 
     /**
@@ -238,6 +264,12 @@ public class MapActivity extends AppCompatActivity implements ConnectionCallback
         super.onStart();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocationServices.FusedLocationApi.removeLocationUpdates(
+                mGoogleApiClient, this);
+    }
     protected void onStop() {
         super.onStop();
         if (mGoogleApiClient.isConnected()) {
