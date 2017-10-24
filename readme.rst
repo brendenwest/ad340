@@ -56,7 +56,7 @@ Each week students will have assigned reading, tutorials or video lectures, as w
 
 Grading
 ----
-TK
+Weekly assignments
 
 Resources
 ----
