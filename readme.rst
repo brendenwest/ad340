@@ -56,7 +56,7 @@ Each week students will have assigned reading, tutorials or video lectures, as w
 
 Grading
 ----
-Weekly assignments are hard
+Weekly assignments for Android class
 
 Resources
 ----
