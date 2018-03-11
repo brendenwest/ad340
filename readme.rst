@@ -56,7 +56,17 @@ Each week students will have assigned reading, tutorials or video lectures, as w
 
 Grading
 ----
-Weekly assignments for Android class
+Grades will be based on regular assignments (80%), 3 quizzes (15%), and class participation (5%).
+
+Coding assignments will be posted on Canvas each Tuesday and are designed to exercise the skills and concepts covered that week.
+
+Assignments are due by the start of class on the following Thursday, and late assignments will be automatically marked down by 20%.
+
+Students will publish completed coding assignments to their github.com repository and submit the repo link in Canvas. Successful submissions will build in Android Studio without errors.
+
+You may discuss how to approach a problem with other students in the class, but your submission must be your own work. Code submissions that are substantially identical would be considered cheating and subject to a markdown penalty.
+
+Quizzes will be administered via Canvas and must be completed during the specified time frame to receive credit.
 
 Resources
 ----
