@@ -31,7 +31,7 @@ There is no required textbook for this course. We will make use of numerous onli
 - https://developer.android.com/index.html
 - https://www.tutorialspoint.com/android/ 
 
-This **optional** textbook may also be helpful - https://www.barnesandnoble.com/w/murachs-android-programming-joel-murach/1124291370
+This **optional** textbook may also be helpful `Murach's Android Programming (2nd Edition) < https://www.barnesandnoble.com/w/murachs-android-programming-joel-murach/1124291370>`_
 
 Students will need the following resources:
 
