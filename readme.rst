@@ -24,14 +24,14 @@ This class covers core concepts of mobile application development with a focus o
 - Account for mobile-specific UI & performance constraints
 - Interact with external data services and API's
 
-Required Materials
+Class Materials
 ----
 There is no required textbook for this course. We will make use of numerous online resources including:
 
 - https://developer.android.com/index.html
 - https://www.tutorialspoint.com/android/ 
 
-Students may find this **optional** textbook helpful - https://www.barnesandnoble.com/w/murachs-android-programming-joel-murach/1124291370
+This **optional** textbook may also be helpful - https://www.barnesandnoble.com/w/murachs-android-programming-joel-murach/1124291370
 
 Students will need the following resources:
 
