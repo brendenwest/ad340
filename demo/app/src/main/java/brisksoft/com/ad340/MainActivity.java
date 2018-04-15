@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DetailActivity.class);
         EditText editText = (EditText) findViewById(R.id.editText);
         String message = editText.getText().toString();
+        Log.d(TAG, "info button " + message);
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
