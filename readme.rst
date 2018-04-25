@@ -11,7 +11,7 @@ Class Details
 - Dates: 4/2/2018 - 6/15/2018 
 - Instructor: Brenden West | brenden.west@seattlecolleges.edu 
 - Credits: 5
-- Pre-requisites: AD 320 & acceptance into AD-BAS program or instructor permission.
+- Pre-requisites:: AD 320 & acceptance into AD-BAS program or instructor permission.
 
 **Note:** Students should have solid understanding of Java programming, XML, and source control with git & github.com
 
