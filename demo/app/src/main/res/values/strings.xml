@@ -22,4 +22,5 @@
     <string name="title_activity_chat">Chat</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_fetch_address_intent_service">FetchAddressIntentService</string>
+    <string name="title_activity_movie">Movie Details</string>
 </resources>

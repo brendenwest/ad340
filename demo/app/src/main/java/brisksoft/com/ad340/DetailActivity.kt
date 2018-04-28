@@ -48,6 +48,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val TAG = DetailActivity::class.java!!.getSimpleName()
+        private val TAG = DetailActivity::class.java.getSimpleName()
     }
 }

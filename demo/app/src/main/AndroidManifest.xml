@@ -57,6 +57,11 @@
             android:name=".MapActivity"
             android:label="@string/title_activity_map"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".MovieActivity"
+            android:label="@string/title_activity_movie"
+            android:parentActivityName=".RecyclerActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
