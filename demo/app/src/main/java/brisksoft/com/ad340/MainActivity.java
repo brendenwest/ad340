@@ -2,10 +2,9 @@ package brisksoft.com.ad340;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -31,34 +30,36 @@ public class MainActivity extends AppCompatActivity {
     // Array of strings...
     String[] demoArray = {"listView", "RecyclerView", "RecyclerView Web", "Map" };
 
+    // helper class to manage writing to SharedPreferences.
+    private SharedPreferencesHelper mSharedPreferencesHelper;
+    private SharedPreferences mSharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate() Main created");
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         setContentView(R.layout.activity_main);
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
+        // Instantiate a SharedPreferencesHelper class
+        mSharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        mSharedPreferencesHelper = new SharedPreferencesHelper(mSharedPreferences);
+
+        // populate text field w/ saved entry
+        EditText editText = findViewById(R.id.editText);
+        editText.setText(mSharedPreferencesHelper.getEntry());
+
         // setup App Bar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
-        GridView gridview = (GridView) findViewById(R.id.gridview);
+        GridView gridview = findViewById(R.id.gridview);
         gridview.setAdapter(new ButtonAdapter(this));
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         // handle navigation drawer events
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -93,12 +94,14 @@ public class MainActivity extends AppCompatActivity {
 
     /** Called when the user taps the Send button */
     public void sendMessage(View view) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
+        EditText editText = findViewById(R.id.editText);
         String message = editText.getText().toString();
-        Log.d(TAG, "info button " + message);
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+        if (inputIsValid(message)) {
+            mSharedPreferencesHelper.saveEntry(message);
+            Intent intent = new Intent(this, DetailActivity.class);
+            intent.putExtra(EXTRA_MESSAGE, message);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -124,6 +127,13 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean inputIsValid(String str) {
+        if (str.length() == 0) {
+            return false;
+        }
+        return true;
     }
 
     public class ButtonAdapter extends BaseAdapter {
