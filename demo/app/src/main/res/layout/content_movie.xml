@@ -30,6 +30,13 @@
         app:layout_constraintLeft_toRightOf="@+id/movieTitle"
         app:layout_constraintRight_toRightOf="parent" />
 
+    <ImageView
+        android:id="@+id/movieImage"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@+id/movieTitle" />
+
     <TextView
         android:id="@+id/movieDesc"
         android:layout_width="match_parent"
@@ -39,6 +46,6 @@
         android:layout_marginTop="24dp"
         android:scrollbars="vertical"
         android:text="desc"
-        app:layout_constraintTop_toBottomOf="@+id/movieTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/movieImage" />
 
 </android.support.constraint.ConstraintLayout>

@@ -2,12 +2,14 @@ package brisksoft.com.ad340
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
+import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_movie.*
 import kotlinx.android.synthetic.main.content_movie.*
 
+import com.squareup.picasso.Picasso
 
 class MovieActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +23,10 @@ class MovieActivity : AppCompatActivity() {
         movieTitle.text = movieData[0]
         movieYear.text = movieData[1]
         movieDesc.text = movieData[4]
+
+        val imageView = findViewById(R.id.movieImage) as ImageView
+
+        Picasso.get().load(movieData[3]).into(imageView);
 
     }
 

@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
 
     // Array of strings...
-    String[] demoArray = {"listView", "RecyclerView", "RecyclerView Web", "Map" };
+    String[] demoArray = {"listView", "Movies", "Traffic Cams", "Map" };
 
     // helper class to manage writing to SharedPreferences.
     private SharedPreferencesHelper mSharedPreferencesHelper;

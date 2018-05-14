@@ -16,7 +16,7 @@
     <string name="demo_list_header">Demos</string>
     <string name="title_activity_detail">Detail</string>
     <string name="title_activity_recycler">Movies</string>
-    <string name="title_activity_recycler_web">RecyclerView from web</string>
+    <string name="title_activity_recycler_web">Seattle Traffic Cameras</string>
     <string name="title_activity_list">ListView</string>
     <string name="title_activity_about">About</string>
     <string name="title_activity_chat">Chat</string>

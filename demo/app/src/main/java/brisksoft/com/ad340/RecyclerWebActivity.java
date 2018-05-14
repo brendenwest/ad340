@@ -9,19 +9,26 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.squareup.picasso.Picasso;
 
 public class RecyclerWebActivity extends AppCompatActivity {
 
@@ -30,10 +37,18 @@ public class RecyclerWebActivity extends AppCompatActivity {
     RecyclerView.Adapter recyclerViewAdapter;
     RecyclerView.LayoutManager recylerViewLayoutManager;
 
-    String url = "http://brisksoft.us/ad340/android_terms.json";
+    String url = " https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2";
 
-    // 2D resizable array
-    List<String[]> terms = new ArrayList<String[]>();
+    List<TrafficCam> cameraList = new ArrayList<>();
+
+    Map<String,String> baseUrls = new HashMap();
+    {
+        {
+            baseUrls.put("sdot", "http://www.seattle.gov/trafficcams/images/");
+            baseUrls.put("wsdot", "http://images.wsdot.wa.gov/nw/");
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +70,31 @@ public class RecyclerWebActivity extends AppCompatActivity {
 
         recyclerViewAdapter = new RecyclerWebActivity.CustomAdapter();
         recyclerView.setAdapter(recyclerViewAdapter);
-
         RequestQueue queue = Volley.newRequestQueue(this);
-        JsonArrayRequest jsonReq = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+        JsonObjectRequest jsonReq = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
+                        Log.d("CAMERAS", response.toString());
                 try {
-                    for(int i = 0; i < response.length(); i++){
-                        String[] item = new String[2];
-                        item[0] = response.getJSONObject(i).getString("title");
-                        item[1] = response.getJSONObject(i).getString("subtitle");
-                        terms.add(item);
+                    JSONArray features = response.getJSONArray("Features"); // top-level node
+                    for(int i = 1; i < features.length(); i++) {
+                        JSONObject point = features.getJSONObject(i);
+                        JSONArray pointCoords = point.getJSONArray("PointCoordinate");
+                        double[] coords = {pointCoords.getDouble(0), pointCoords.getDouble(1)};
+
+                        // points may have more than one camera
+                        JSONArray cameras = point.getJSONArray("Cameras");
+                        for (int j = 0; j < cameras.length(); j++) {
+                            JSONObject camera = cameras.getJSONObject(j);
+                            TrafficCam c = new TrafficCam(
+                                    camera.getString("Description"),
+                                    camera.getString("ImageUrl"),
+                                    camera.getString("Type"),
+                                    coords
+                            );
+                            cameraList.add(c);
+                        }
                     }
                     // trigger refresh of recycler view
                     recyclerViewAdapter.notifyDataSetChanged();
@@ -88,12 +117,12 @@ public class RecyclerWebActivity extends AppCompatActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
-            public TextView mTitle;
-            public TextView mDetail;
+            public TextView mName;
+            public ImageView mImage;
             public ViewHolder(View v) {
                 super(v);
-                mTitle = (TextView) v.findViewById(R.id.item_title);
-                mDetail = (TextView) v.findViewById(R.id.item_subtitle);
+                mName = v.findViewById(R.id.description);
+                mImage = v.findViewById(R.id.image);
             }
         }
 
@@ -101,7 +130,7 @@ public class RecyclerWebActivity extends AppCompatActivity {
         public CustomAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
 
             // Inflate the view for this view holder
-            View item = getLayoutInflater().inflate(R.layout.list_2_items, parent,
+            View item = getLayoutInflater().inflate(R.layout.camera_items, parent,
                     false);
 
             // Call the view holder's constructor, and pass the view to it;
@@ -115,14 +144,15 @@ public class RecyclerWebActivity extends AppCompatActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
-            holder.mTitle.setText(terms.get(position)[0]);
-            holder.mDetail.setText(terms.get(position)[1]);
+            holder.mName.setText(cameraList.get(position).getDescription());
+            String url = baseUrls.get(cameraList.get(position).getType()) + cameraList.get(position).getImageUrl();
+            Picasso.get().load(url).into(holder.mImage);
         }
 
         // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
-            return terms.size();
+            return cameraList.size();
         }
     }
 }
