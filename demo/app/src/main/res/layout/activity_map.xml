@@ -8,86 +8,71 @@
 
     <include layout="@layout/toolbar" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/label1"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="?attr/actionBarSize"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="parent">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+        android:padding="8dp"
+        android:text="@string/label_latitude"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textLatitude"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="parent"
-            >
+            app:layout_constraintBaseline_toBaselineOf="@+id/label1"
+            app:layout_constraintStart_toEndOf="@+id/label1" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="12dp"
-                android:paddingRight="20dp"
-                android:text="@string/label_latitude"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textLatitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/label2"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-        >
+            android:padding="8dp"
+            android:text="@string/label_longitude"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label1" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="12dp"
-                android:paddingRight="20dp"
-                android:text="@string/label_longitude"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textLongitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textLongitude"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            >
+            app:layout_constraintBaseline_toBaselineOf="@+id/label2"
+            app:layout_constraintStart_toEndOf="@+id/label2" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="12dp"
-                android:paddingRight="20dp"
-                android:text="@string/label_location"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/textLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/label3"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/label_location"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label2" />
 
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/map"
-            tools:context=".MapActivity"
-            android:name="com.google.android.gms.maps.SupportMapFragment" />
+        <TextView
+            android:id="@+id/textLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@+id/label3"
+            app:layout_constraintStart_toEndOf="@+id/label3" />
 
-    </LinearLayout>
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:layout_constraintTop_toBottomOf="@+id/label3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:context=".MapActivity"
+        tools:layout="@layout/fragment_map" />
 
 </android.support.constraint.ConstraintLayout>
