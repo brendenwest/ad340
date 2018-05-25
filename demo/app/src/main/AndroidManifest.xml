@@ -62,6 +62,11 @@
             android:label="@string/title_activity_movie"
             android:parentActivityName=".RecyclerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TrafficCamMap"
+            android:label="@string/title_activity_traffic_cam_map"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

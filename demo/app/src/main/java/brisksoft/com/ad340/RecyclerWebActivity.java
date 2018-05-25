@@ -41,15 +41,6 @@ public class RecyclerWebActivity extends AppCompatActivity {
 
     List<TrafficCam> cameraList = new ArrayList<>();
 
-    Map<String,String> baseUrls = new HashMap();
-    {
-        {
-            baseUrls.put("sdot", "http://www.seattle.gov/trafficcams/images/");
-            baseUrls.put("wsdot", "http://images.wsdot.wa.gov/nw/");
-
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +61,7 @@ public class RecyclerWebActivity extends AppCompatActivity {
 
         recyclerViewAdapter = new RecyclerWebActivity.CustomAdapter();
         recyclerView.setAdapter(recyclerViewAdapter);
+
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonReq = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -145,8 +137,8 @@ public class RecyclerWebActivity extends AppCompatActivity {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
             holder.mName.setText(cameraList.get(position).getDescription());
-            String url = baseUrls.get(cameraList.get(position).getType()) + cameraList.get(position).getImageUrl();
-            Picasso.get().load(url).into(holder.mImage);
+            //String url = baseUrls.get(cameraList.get(position).getType()) + cameraList.get(position).getImageUrl();
+            Picasso.get().load(cameraList.get(position).imageUrl()).into(holder.mImage);
         }
 
         // Return the size of your dataset (invoked by the layout manager)

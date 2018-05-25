@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
                                 intent = new Intent(MainActivity.this, MapActivity.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.nav_map_cams:
+                                intent = new Intent(MainActivity.this, TrafficCamMap.class);
+                                startActivity(intent);
+                                break;
                             case R.id.nav_about:
                                 intent = new Intent(MainActivity.this, AboutActivity.class);
                                 startActivity(intent);

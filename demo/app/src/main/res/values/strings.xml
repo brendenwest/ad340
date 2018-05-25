@@ -24,4 +24,5 @@
     <string name="title_activity_fetch_address_intent_service">FetchAddressIntentService</string>
     <string name="title_activity_movie">Movie Details</string>
     <string name="saved_text_entry">text_entry</string>
+    <string name="title_activity_traffic_cam_map">Traffic Cam Map</string>
 </resources>
