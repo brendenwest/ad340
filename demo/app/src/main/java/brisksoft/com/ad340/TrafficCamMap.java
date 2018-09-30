@@ -194,7 +194,7 @@ public class TrafficCamMap extends AppCompatActivity implements
         Log.d("LOCATION","onMapReady");
         mMap = googleMap;
         mMap.setInfoWindowAdapter(new CameraInfoWindow(this));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(mLastLocation, 12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), 12));
     }
 
     /**
