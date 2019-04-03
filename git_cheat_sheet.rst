@@ -36,4 +36,4 @@ Git has a great variety of options, so it's important to use the simplest workfl
 
 (by default, remote repo is called 'origin' and local repo branch is 'master')
 
-Other Useful Git commands - https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf
+Other Useful Git commands - https://education.github.com/git-cheat-sheet-education.pdf
