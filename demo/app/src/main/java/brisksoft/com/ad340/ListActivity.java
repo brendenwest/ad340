@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class ListActivity extends AppCompatActivity {
-    // Array of strings...
-    String[] demoArray = {"list", "List w/ cursor","GridView","WebView", "RecyclerView" };
+    // Array of strings
+    String[] demoArray = {"Seattle", "Spokane","Tacoma","Vancouver", "Walla Walla", "Yakima" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +20,12 @@ public class ListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
+        ArrayAdapter adapter = new ArrayAdapter<>(this,
                 R.layout.list_item, demoArray);
 
-        ListView listView = (ListView) findViewById(R.id.demo_list);
+        ListView listView = findViewById(R.id.demo_list);
         listView.setAdapter(adapter);
+        // add a header to the list
         ViewGroup header = (ViewGroup) getLayoutInflater().inflate(R.layout.list_header, listView,
                 false);
         listView.addHeaderView(header, null, false);

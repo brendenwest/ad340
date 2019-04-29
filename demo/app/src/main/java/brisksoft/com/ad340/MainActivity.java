@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
 
     // Array of strings...
-    String[] demoArray = {"listView", "Movies", "Traffic Cams", "Map" };
+    String[] demoArray = {"Cities", "Movies 1", "Movies 2", "Traffic Cams", "Map" };
 
     // helper class to manage writing to SharedPreferences.
     private SharedPreferencesHelper mSharedPreferencesHelper;
@@ -191,14 +191,18 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case 1:
-                    intent = new Intent(getBaseContext(), RecyclerActivity.class);
+                    intent = new Intent(getBaseContext(), MovieListActivity.class);
                     startActivity(intent);
                     break;
                 case 2:
-                    intent = new Intent(getBaseContext(), RecyclerWebActivity.class);
+                    intent = new Intent(getBaseContext(), RecyclerActivity.class);
                     startActivity(intent);
                     break;
                 case 3:
+                    intent = new Intent(getBaseContext(), RecyclerWebActivity.class);
+                    startActivity(intent);
+                    break;
+                case 4:
                     intent = new Intent(getBaseContext(), MapActivity.class);
                     startActivity(intent);
                     break;

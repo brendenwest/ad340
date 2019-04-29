@@ -9,8 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 public class RecyclerActivity extends AppCompatActivity {
 
@@ -82,10 +85,12 @@ public class RecyclerActivity extends AppCompatActivity {
             // each data item is just a string in this case
             public TextView mTitle;
             public TextView mDetail;
+            public ImageView mImage;
             public ViewHolder(final View itemView) {
                 super(itemView);
-                mTitle = (TextView) itemView.findViewById(R.id.item_title);
-                mDetail = (TextView) itemView.findViewById(R.id.item_subtitle);
+                mTitle = itemView.findViewById(R.id.movieTitle);
+                mDetail = itemView.findViewById(R.id.movieYear);
+                mImage = itemView.findViewById(R.id.movieImage);
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override public void onClick(View v) {
                         int pos = getAdapterPosition();
@@ -100,7 +105,7 @@ public class RecyclerActivity extends AppCompatActivity {
         public CustomAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
 
             // Inflate the view for this view holder
-            View item = getLayoutInflater().inflate(R.layout.list_2_items, parent,
+            View item = getLayoutInflater().inflate(R.layout.movie_list_row_layout, parent,
                     false);
 
             // Call the view holder's constructor, and pass the view to it;
@@ -116,6 +121,8 @@ public class RecyclerActivity extends AppCompatActivity {
             // - replace the contents of the view with that element
             holder.mTitle.setText(movies[position][0]);
             holder.mDetail.setText(movies[position][1]);
+            Picasso.get().load(movies[position][3]).into(holder.mImage);
+
         }
 
         // Return the size of your dataset (invoked by the layout manager)
