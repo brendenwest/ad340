@@ -51,7 +51,6 @@ public class TrafficCamMap extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener {
 
     private FusedLocationProviderClient mFusedLocationClient;
-    private LocationCallback mLocationCallback;
 
     private Location mLastLocation;
     private GoogleMap mMap;
@@ -67,23 +66,22 @@ public class TrafficCamMap extends AppCompatActivity implements
     List<TrafficCam> cameraList = new ArrayList<>();
 
     private AddressResultReceiver mAddressReceiver;
-    private Marker mLastSelectedMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_cams);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAddressRequested = true;
         mAddressOutput = "";
 
-        mLatitudeText = (TextView) findViewById(R.id.textLatitude);
-        mLongitudeText = (TextView) findViewById(R.id.textLongitude);
-        mLocationText = (TextView) findViewById(R.id.textLocation);
+        mLatitudeText = findViewById(R.id.textLatitude);
+        mLongitudeText = findViewById(R.id.textLongitude);
+        mLocationText = findViewById(R.id.textLocation);
 
         // Load MapFragment and request map-ready notification
         MapFragment mapFragment = (MapFragment) getFragmentManager()
@@ -92,31 +90,11 @@ public class TrafficCamMap extends AppCompatActivity implements
 
         // get user's location
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        createLocationCallback();
         getLocation();
 
         // load camera data
         loadCameraData();
 
-    }
-
-    /**
-     * Creates a callback for receiving location events.
-     */
-    private void createLocationCallback() {
-        mLocationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                Log.d("LOCATION","onLocationResult");
-                if (locationResult == null) {
-                    return;
-                }
-                for (Location location : locationResult.getLocations()) {
-                    mLastLocation = location;
-                    updateUI();
-                }
-            };
-        };
     }
 
     @Override
@@ -194,7 +172,6 @@ public class TrafficCamMap extends AppCompatActivity implements
         Log.d("LOCATION","onMapReady");
         mMap = googleMap;
         mMap.setInfoWindowAdapter(new CameraInfoWindow(this));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), 12));
     }
 
     /**
@@ -251,7 +228,7 @@ public class TrafficCamMap extends AppCompatActivity implements
             // get location updates
         } else {
 
-            // initiate geocode request
+            // initiate geocode request for my location
             if (mAddressRequested) {
                 startIntentService();
             }
@@ -265,11 +242,11 @@ public class TrafficCamMap extends AppCompatActivity implements
     }
 
     /**
-     * Loads camera data
+     * Load camera data into map markers
      */
     public void showMarkers() {
         Log.d("DATA", cameraList.toString());
-        for (int i=0; i<cameraList.size(); i++) {
+        for (int i=0; i < cameraList.size(); i++) {
             TrafficCam c = cameraList.get(i);
             LatLng position = new LatLng(c.getCoords()[0], c.getCoords()[1]);
             Marker m = mMap.addMarker(new MarkerOptions()
@@ -319,9 +296,6 @@ public class TrafficCamMap extends AppCompatActivity implements
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             Log.d("receivedResult", resultData.toString());
-            if (resultData == null) {
-                return;
-            }
 
             // Display the address string or an error message sent from the intent service.
             mAddressOutput = resultData.getString(Constants.RESULT_DATA_KEY);

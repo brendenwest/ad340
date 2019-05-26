@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText mPasswordField;
 
     // Array of strings...
-    String[] demoArray = {"Cities", "Movies 1", "Movies 2", "Traffic Cams kt", "Map", "Traffic Cams java",  };
+    String[] demoArray = {"Cities", "Movies 1", "Movies 2", "Traffic Cams kt", "Traffic Cams java", "Location", "Map w/ markers" };
 
     // helper class to manage writing to SharedPreferences.
     private SharedPreferencesHelper mSharedPreferencesHelper;
@@ -276,7 +276,6 @@ public class MainActivity extends AppCompatActivity {
         {
             Log.d(TAG, "tapped button");
             int id = v.getId();
-            Log.d(TAG, Integer.toString(id));
 
             Intent intent;
             switch (id) {
@@ -297,11 +296,15 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case 4:
-                    intent = new Intent(getBaseContext(), MapActivity.class);
+                    intent = new Intent(getBaseContext(), TrafficCamActivity.class);
                     startActivity(intent);
                     break;
                 case 5:
-                    intent = new Intent(getBaseContext(), TrafficCamActivity.class);
+                    intent = new Intent(getBaseContext(), MapActivity.class);
+                    startActivity(intent);
+                    break;
+                case 6:
+                    intent = new Intent(getBaseContext(), TrafficCamMap.class);
                     startActivity(intent);
                     break;
                 default:
