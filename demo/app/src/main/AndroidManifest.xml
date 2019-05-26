@@ -8,16 +8,26 @@
 
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".FirebaseActivity"
+            android:label="@string/title_activity_firebase"
+            android:parentActivityName=".MainActivity"
+            ></activity>
+        <activity
+            android:name=".TrafficCamActivity"
+            android:label="@string/title_activity_traffic_cam"
+            android:parentActivityName=".MainActivity"
+            />
         <activity
             android:name=".MovieListActivity"
             android:label="@string/title_activity_movie_list"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -39,10 +49,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".DetailActivity"
-            android:label="@string/title_activity_detail"
-            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".RecyclerWebActivity"
             android:label="@string/title_activity_recycler_web"
@@ -67,12 +73,12 @@
             android:name=".MovieActivity"
             android:label="@string/title_activity_movie"
             android:parentActivityName=".RecyclerActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity
             android:name=".TrafficCamMap"
             android:label="@string/title_activity_traffic_cam_map"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
     </application>
 
 </manifest>

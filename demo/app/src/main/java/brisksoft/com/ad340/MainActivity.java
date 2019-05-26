@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -22,17 +24,29 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myapplication.MESSAGE";
     private static final String TAG = MainActivity.class.getSimpleName();
     private DrawerLayout mDrawerLayout;
 
+    private FirebaseAuth mAuth;
+    private EditText mNameField;
+    private EditText mEmailField;
+    private EditText mPasswordField;
+
     // Array of strings...
-    String[] demoArray = {"Cities", "Movies 1", "Movies 2", "Traffic Cams", "Map" };
+    String[] demoArray = {"Cities", "Movies 1", "Movies 2", "Traffic Cams kt", "Map", "Traffic Cams java",  };
 
     // helper class to manage writing to SharedPreferences.
     private SharedPreferencesHelper mSharedPreferencesHelper;
-    private SharedPreferences mSharedPreferences;
+    SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +61,29 @@ public class MainActivity extends AppCompatActivity {
         mSharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         mSharedPreferencesHelper = new SharedPreferencesHelper(mSharedPreferences);
 
-        // populate text field w/ saved entry
-        EditText editText = findViewById(R.id.editText);
-        editText.setText(mSharedPreferencesHelper.getEntry());
+        mAuth = FirebaseAuth.getInstance();
+
+        // text entry fields
+        mNameField = findViewById(R.id.userName);
+        mEmailField = findViewById(R.id.fieldEmail);
+        mPasswordField = findViewById(R.id.fieldPassword);
+
+        mNameField.setText(mSharedPreferencesHelper.getEntry("name"));
+        mEmailField.setText(mSharedPreferencesHelper.getEntry("email"));
+        mPasswordField.setText(mSharedPreferencesHelper.getEntry("password"));
+
+        Button mSignInButton = findViewById(R.id.buttonSignIn);
+        mSignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mAuth.getCurrentUser() == null) {
+                    signIn();
+                } else {
+                    // Go to FirebaseActivity
+                    startActivity(new Intent(MainActivity.this, FirebaseActivity.class));
+                }
+            }
+        });
 
         // setup App Bar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -96,16 +130,55 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /** Called when the user taps the Send button */
-    public void sendMessage(View view) {
-        EditText editText = findViewById(R.id.editText);
-        String message = editText.getText().toString();
-        if (inputIsValid(message)) {
-            mSharedPreferencesHelper.saveEntry(message);
-            Intent intent = new Intent(this, DetailActivity.class);
-            intent.putExtra(EXTRA_MESSAGE, message);
-            startActivity(intent);
+    private void signIn() {
+        Log.d(TAG, "signIn");
+        String name = mNameField.getText().toString();
+        String email = mEmailField.getText().toString();
+        String password = mPasswordField.getText().toString();
+
+        if (!validateForm(name, email, password)) {
+            return;
         }
+        Log.d("FIREBASE", "sign-in");
+
+        // store shared preferences
+        mSharedPreferencesHelper.saveEntry("name", name);
+        mSharedPreferencesHelper.saveEntry("email", email);
+        mSharedPreferencesHelper.saveEntry("password", password);
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d("FIREBASE", "signIn:onComplete:" + task.isSuccessful());
+
+                        if (task.isSuccessful()) {
+                            // update profile
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(mNameField.getText().toString())
+                                    .build();
+
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("FIREBASE", "User profile updated.");
+                                                // Go to FirebaseActivity
+                                                startActivity(new Intent(MainActivity.this, FirebaseActivity.class));
+                                            }
+                                        }
+                                    });
+
+                        } else {
+                            Log.d("FIREBASE", "sign-in failed");
+
+                            Toast.makeText(MainActivity.this, "Sign In Failed",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     @Override
@@ -138,6 +211,25 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private boolean validateForm(String userName, String email, String password) {
+        boolean result = true;
+        if (TextUtils.isEmpty(email)) {
+            mEmailField.setError("Required");
+            result = false;
+        } else {
+            mEmailField.setError(null);
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            mPasswordField.setError("Required");
+            result = false;
+        } else {
+            mPasswordField.setError(null);
+        }
+
+        return result;
     }
 
     public class ButtonAdapter extends BaseAdapter {
@@ -184,6 +276,8 @@ public class MainActivity extends AppCompatActivity {
         {
             Log.d(TAG, "tapped button");
             int id = v.getId();
+            Log.d(TAG, Integer.toString(id));
+
             Intent intent;
             switch (id) {
                 case 0:
@@ -206,6 +300,10 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(getBaseContext(), MapActivity.class);
                     startActivity(intent);
                     break;
+                case 5:
+                    intent = new Intent(getBaseContext(), TrafficCamActivity.class);
+                    startActivity(intent);
+                    break;
                 default:
                     Button b = (Button) v;
                     String label = b.getText().toString();
@@ -214,5 +312,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        mAuth.signOut();
     }
 }
