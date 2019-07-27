@@ -1,37 +1,27 @@
 package brisksoft.com.ad340;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.ResultReceiver;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -44,11 +34,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrafficCamMap extends AppCompatActivity implements
-        OnMapReadyCallback,
-        LocationListener,
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+/* Map w/ markers
+- renders a Google map
+- requests location permission
+- gets last known location
+- centers map on location & sets zoom level
+- creates marker for current location
+- loads camera data from internet
+- populates map markers with camera data
+*/
+
+public class TrafficCamMap extends AppCompatActivity implements OnMapReadyCallback {
 
     private FusedLocationProviderClient mFusedLocationClient;
 
@@ -56,16 +52,9 @@ public class TrafficCamMap extends AppCompatActivity implements
     private GoogleMap mMap;
 
     private final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 9;
-    protected boolean mAddressRequested;
-    protected String mAddressOutput;
 
-    protected TextView mLatitudeText;
-    protected TextView mLongitudeText;
-    protected TextView mLocationText;
 
     List<TrafficCam> cameraList = new ArrayList<>();
-
-    private AddressResultReceiver mAddressReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,13 +64,6 @@ public class TrafficCamMap extends AppCompatActivity implements
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mAddressRequested = true;
-        mAddressOutput = "";
-
-        mLatitudeText = findViewById(R.id.textLatitude);
-        mLongitudeText = findViewById(R.id.textLongitude);
-        mLocationText = findViewById(R.id.textLocation);
 
         // Load MapFragment and request map-ready notification
         MapFragment mapFragment = (MapFragment) getFragmentManager()
@@ -93,12 +75,10 @@ public class TrafficCamMap extends AppCompatActivity implements
         getLocation();
 
         // load camera data
-        loadCameraData();
+        String dataUrl = " https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2";
+        loadCameraData(dataUrl);
 
     }
-
-    @Override
-    public void onConnected(Bundle connectionHint) {}
 
     public void getLocation() {
         Log.d("LOCATION","getLocation");
@@ -177,8 +157,7 @@ public class TrafficCamMap extends AppCompatActivity implements
     /**
      * Loads camera data
      */
-    public void loadCameraData() {
-        String dataUrl = " https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2";
+    public void loadCameraData(String dataUrl) {
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonReq = new JsonObjectRequest
                 (Request.Method.GET, dataUrl, null, new Response.Listener<JSONObject>() {
@@ -228,15 +207,11 @@ public class TrafficCamMap extends AppCompatActivity implements
             // get location updates
         } else {
 
-            // initiate geocode request for my location
-            if (mAddressRequested) {
-                startIntentService();
-            }
-
             LatLng myLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             mMap.setMinZoomPreference(12); // zoom to city level
             mMap.addMarker(new MarkerOptions().position(myLocation)
-                    .title("My current location"));
+                    .title("My current location")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
         }
     }
@@ -265,72 +240,8 @@ public class TrafficCamMap extends AppCompatActivity implements
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-        Log.d("LOCATION","onLocationChanged");
-        mLastLocation = location;
-        updateUI();
-    }
-
-    /**
-     * Creates an intent, adds location data to it as an extra, and starts the intent service for
-     * fetching an address.
-     */
-    protected void startIntentService() {
-        Intent intent = new Intent(this, FetchAddressIntentService.class);
-        intent.putExtra(Constants.RECEIVER, mAddressReceiver);
-        intent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
-        startService(intent);
-    }
-
-    /**
-     * Receiver for data sent from FetchAddressIntentService.
-     */
-    class AddressResultReceiver extends ResultReceiver {
-        public AddressResultReceiver(Handler handler) {
-            super(handler);
-        }
-        /**
-         *  Receives data sent from FetchAddressIntentService and updates the UI in MainActivity.
-         */
-
-        @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-            Log.d("receivedResult", resultData.toString());
-
-            // Display the address string or an error message sent from the intent service.
-            mAddressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
-            Log.d("LOCATION", mAddressOutput);
-            mLocationText.setText(mAddressOutput);
-
-            // Show a toast message if an address was found.
-            if (resultCode == Constants.SUCCESS_RESULT) {
-                showToast(getString(R.string.address_found));
-            }
-
-            // Reset. Enable the Fetch Address button and stop showing the progress bar.
-            mAddressRequested = false;
-        }
-    }
-
-
-    @Override
-    public void onConnectionFailed(ConnectionResult result) {
-        showToast("Connection failed.");
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-        if (i == CAUSE_SERVICE_DISCONNECTED) {
-            showToast("Disconnected. Please re-connect.");
-        } else if (i == CAUSE_NETWORK_LOST) {
-            showToast("Network lost. Please re-connect.");
-        }
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
-        mAddressReceiver = new AddressResultReceiver(new Handler());
     }
 
     @Override

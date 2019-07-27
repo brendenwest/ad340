@@ -8,10 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 
 import brisksoft.com.ad340.SharedPreferencesHelper;
@@ -29,6 +27,7 @@ public class SharedPreferencesUnitTest {
     private SharedPreferencesHelper mMockSharedPreferencesHelper;
 
     private String text_entry = "blahckish";
+    private String key = "name";
 
     @Before
     public void initMocks() {
@@ -42,12 +41,12 @@ public class SharedPreferencesUnitTest {
     public void sharedPreferences_SaveAndReadEntry() {
 
         // Save the personal information to SharedPreferences
-        boolean success = mMockSharedPreferencesHelper.saveEntry(text_entry);
+        boolean success = mMockSharedPreferencesHelper.saveEntry(key, text_entry);
 
         assertThat("SharedPreferenceEntry.save... returns true",
                 success, is(true));
 
-        assertEquals(text_entry, mMockSharedPreferencesHelper.getEntry());
+        assertEquals(text_entry, mMockSharedPreferencesHelper.getEntry(key));
 
     }
 
@@ -58,7 +57,7 @@ public class SharedPreferencesUnitTest {
 
         // Mocking reading the SharedPreferences as if mMockSharedPreferences was previously written
         // correctly.
-        when(mMockSharedPreferences.getString(eq("text_entry"), anyString()))
+        when(mMockSharedPreferences.getString(eq(key), anyString()))
                 .thenReturn(text_entry);
 
         // Mocking a successful commit.

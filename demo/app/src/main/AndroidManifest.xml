@@ -11,11 +11,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".FirebaseActivity"
+            android:name=".TeamActivity"
             android:label="@string/title_activity_firebase"
             android:parentActivityName=".MainActivity"
             ></activity>
@@ -34,7 +33,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCvMD1G4-l9ahX0r9Jwb-1W3sohJA1-6NY" />
+            android:value="@string/google_maps_api_key" />
 
         <service
             android:name=".FetchAddressIntentService"

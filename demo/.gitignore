@@ -8,4 +8,5 @@ gradle/
 build/
 /captures
 .externalNativeBuild
+secrets.xml
 /hw

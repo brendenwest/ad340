@@ -4,13 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private DrawerLayout mDrawerLayout;
 
-    private FirebaseAuth mAuth;
     private EditText mNameField;
     private EditText mEmailField;
     private EditText mPasswordField;
@@ -61,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
         mSharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         mSharedPreferencesHelper = new SharedPreferencesHelper(mSharedPreferences);
 
-        mAuth = FirebaseAuth.getInstance();
-
         // text entry fields
         mNameField = findViewById(R.id.userName);
         mEmailField = findViewById(R.id.fieldEmail);
@@ -76,12 +73,8 @@ public class MainActivity extends AppCompatActivity {
         mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mAuth.getCurrentUser() == null) {
-                    signIn();
-                } else {
-                    // Go to FirebaseActivity
-                    startActivity(new Intent(MainActivity.this, FirebaseActivity.class));
-                }
+                Log.d("FIREBASE", "click");
+                signIn();
             }
         });
 
@@ -131,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void signIn() {
-        Log.d(TAG, "signIn");
+        Log.d("FIREBASE", "signIn");
         String name = mNameField.getText().toString();
         String email = mEmailField.getText().toString();
         String password = mPasswordField.getText().toString();
@@ -139,13 +132,13 @@ public class MainActivity extends AppCompatActivity {
         if (!validateForm(name, email, password)) {
             return;
         }
-        Log.d("FIREBASE", "sign-in");
 
         // store shared preferences
         mSharedPreferencesHelper.saveEntry("name", name);
         mSharedPreferencesHelper.saveEntry("email", email);
         mSharedPreferencesHelper.saveEntry("password", password);
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -166,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                                             if (task.isSuccessful()) {
                                                 Log.d("FIREBASE", "User profile updated.");
                                                 // Go to FirebaseActivity
-                                                startActivity(new Intent(MainActivity.this, FirebaseActivity.class));
+                                                startActivity(new Intent(MainActivity.this, TeamActivity.class));
                                             }
                                         }
                                     });
@@ -319,6 +312,6 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onDestroy() {
         super.onDestroy();
-        mAuth.signOut();
+//        mAuth.signOut();
     }
 }
