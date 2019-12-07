@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
+import android.speech.tts.TextToSpeech;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,8 +41,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText mEmailField;
     private EditText mPasswordField;
 
+    private TextToSpeech tts;
+
     // Array of strings...
-    String[] demoArray = {"Cities", "Movies 1", "Movies 2", "Traffic Cams kt", "Traffic Cams java", "Location", "Map w/ markers" };
+    String[] demoArray = {"Cities", "Movies 1", "Movies 2", "Traffic Cams kt", "Traffic Cams java", "Location", "Map w/ markers", "Text2Speech" };
 
     // helper class to manage writing to SharedPreferences.
     private SharedPreferencesHelper mSharedPreferencesHelper;
@@ -87,6 +90,18 @@ public class MainActivity extends AppCompatActivity {
 
         GridView gridview = findViewById(R.id.gridview);
         gridview.setAdapter(new ButtonAdapter(this));
+
+        tts = new TextToSpeech ( getApplicationContext () , new TextToSpeech.OnInitListener () {
+            @Override
+            public void onInit(int status) {
+
+//                if (status != TextToSpeech.ERROR) {
+//                    tts.setLanguage ( Locale.ENGLISH );
+//
+//                }
+
+            }
+        } );
 
         // handle navigation drawer events
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -303,6 +318,7 @@ public class MainActivity extends AppCompatActivity {
                 default:
                     Button b = (Button) v;
                     String label = b.getText().toString();
+                    tts.speak ( label , TextToSpeech.QUEUE_FLUSH , null );
                     Toast.makeText(MainActivity.this, label,
                             Toast.LENGTH_SHORT).show();
                     break;
