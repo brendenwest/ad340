@@ -29,7 +29,7 @@ There is no required textbook for this course. We will make use of numerous onli
 
 - https://developer.android.com/index.html
 - https://developer.android.com/courses
-- `Android Studio 4.0 Development Essentials <https://learning.oreilly.com/library/view/professional-android-4th/9781118949528/>`_ (via O'Reilly Online)
+- Android Studio 4.0 Development Essentials `Java <https://learning.oreilly.com/library/view/android-studio-40/9781800562660/>`_  or `Kotlin <https://learning.oreilly.com/library/view/android-studio-40/9781800560437/>`_
 
 Students will need the following resources:
 
