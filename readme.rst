@@ -7,7 +7,7 @@ Class Details
 
 - Location: IB 3406
 - Time: Virtual, Wed 6:00 - 8:40pm
-- Dates: 4/5/2021 - 6/18/2018
+- Dates: 4/5/2021 - 6/18/2021
 - Instructor: Brenden West | brenden.west@seattlecolleges.edu 
 - Credits: 5
 - Pre-requisites:: AD 300 & acceptance into AD-BAS program or instructor permission.
