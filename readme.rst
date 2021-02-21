@@ -2,40 +2,39 @@
 AD 340 - Mobile Development
 --------
 
-
 Class Details
 ----
 
 - Location: IB 3406
-- Time: Hybrid, Tues 6:00 - 8:40pm
-- Dates: 4/2/2018 - 6/15/2018 
+- Time: Virtual, Wed 6:00 - 8:40pm
+- Dates: 4/5/2021 - 6/18/2018
 - Instructor: Brenden West | brenden.west@seattlecolleges.edu 
 - Credits: 5
-- Pre-requisites:: AD 320 & acceptance into AD-BAS program or instructor permission.
+- Pre-requisites:: AD 300 & acceptance into AD-BAS program or instructor permission.
 
-**Note:** Students should have very solid understanding of Java programming, XML, and source control with git & github.com
+**Note:** Students should have solid understanding of Java programming, dev environment configuration, XML, and git source control
 
 Summary
 ----
-This class covers core concepts of mobile application development with a focus on developing for Android. Course materials and assignments will cover the main topics Android mobile developers are expected to know, and students will learn to:
+This class covers core concepts of mobile application development with a focus on Android. Course materials and assignments will cover the main topics Android mobile developers might be expected to know. Students will learn to:
 
 - Design, develop, & deploy a native Android application,
-- Account for different mobile-device form factors and OS versions,
-- Account for mobile-specific UI & performance constraints
-- Interact with external data services and API's
+- Accommodate different mobile-device form factors and platform versions,
+- Leverage mobile-specific capabilities
+- Interact with external web services
 
 Class Materials
 ----
 There is no required textbook for this course. We will make use of numerous online resources including:
 
 - https://developer.android.com/index.html
-- https://www.tutorialspoint.com/android/ 
+- https://developer.android.com/courses
 
-This **optional** book - `Murachs Android Programming <https://www.barnesandnoble.com/w/murachs-android-programming-joel-murach/1124291370>`_ may also be helpful.
+- `Android Studio 4.0 Development Essentials <https://learning.oreilly.com/library/view/professional-android-4th/9781118949528/>`_
 
 Students will need the following resources:
 
-- A computer w/ `Android Studio 3.0 <https://developer.android.com/studio/install.html>`_ installed
+- A computer w/ `Android Studio 4.x <https://developer.android.com/studio/install.html>`_ installed
 - A Google Play developer account ($25 one-time fee) 
 - A `github.com <https://github.com>`_ account
 
@@ -45,20 +44,18 @@ Each week students will have assigned reading, tutorials or video lectures, as w
 
 - Mobile development overview
 - The Android development ecosystem 
-- Android activities & views
+- Android activities & intents
+- UI Layouts, components, & event handling
 - Android testing & debugging
-- UI Layouts & event handling
 - Dependency management
 - Menus & navigation UI
-- Complex UI with fragments
-- Asynchronous tasks, services & notifications
+- Asynchronous tasks & web services
 - Data storage & content providers
-- Grapics & animation
 - Application deployment
 
 Grading
 ----
-Grades will be based on regular assignments (80%), 3 quizzes (15%), and class participation (5%).
+Grades will be based on regular assignments (80%) and quizzes (20%).
 
 Coding assignments will be posted on Canvas each Tuesday and are designed to exercise the skills and concepts covered that week.
 
@@ -73,11 +70,12 @@ Quizzes will be administered via Canvas and must be completed during the specifi
 Resources
 ----
 
-- https://developer.android.com/develop/index.html 
+- https://developer.android.com/develop/index.html
+- https://developer.android.com/courses
 - https://www.tutorialspoint.com/android/ 
 - http://www.vogella.com/tutorials/Android/article.html
-- https://www.tutorialspoint.com/java  
-- https://www.tutorialspoint.com/kotlin/index.htm
+- https://www.tutorialspoint.com/java
+- https://www.tutorialspoint.com/kotlin
 	
 						
-**Note:** Seattle Public Library provides free access to many technical reference books at: https://ezproxy.spl.org/login?url=http://proquestcombo.safaribooksonline.com/?uicode=spl 
+**Note:** North Seattle College provides free access to many technical reference books at: https://sbctc-seattlecolleges.primo.exlibrisgroup.com/discovery/search?vid=01STATEWA_SEATTLE:NSEATTLE&lang=en
