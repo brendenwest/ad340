@@ -29,8 +29,7 @@ There is no required textbook for this course. We will make use of numerous onli
 
 - https://developer.android.com/index.html
 - https://developer.android.com/courses
-
-- `Android Studio 4.0 Development Essentials <https://learning.oreilly.com/library/view/professional-android-4th/9781118949528/>`_
+- `Android Studio 4.0 Development Essentials <https://learning.oreilly.com/library/view/professional-android-4th/9781118949528/>`_ (via O'Reilly Online)
 
 Students will need the following resources:
 
@@ -40,7 +39,11 @@ Students will need the following resources:
 
 Class Structure & Topics
 ----
-Each week students will have assigned reading, tutorials or video lectures, as well as Thursday lectures covering the following topics, although sequence and precise list is subject to revision:
+Course instruction will be fully remote with weekly video conference at the scheduled class time to review assigned topics and address questions. Students should have completed assigned readings & videos prior to class.
+
+Students can reach me directly throughout the week in the NSC:AD Slack channel.
+
+This course will cover the following topics, although the precise list & order is subject to revision:
 
 - Mobile development overview
 - The Android development ecosystem 
@@ -55,13 +58,13 @@ Each week students will have assigned reading, tutorials or video lectures, as w
 
 Grading
 ----
-Grades will be based on regular assignments (80%) and quizzes (20%).
+Grades will be based on regular assignments (80%) and quizzes (20%). There is no final exam.
 
 Coding assignments will be posted on Canvas each Tuesday and are designed to exercise the skills and concepts covered that week.
 
-Assignments are due by the start of class on the following Thursday, and late assignments may be automatically marked down by 10%.
+Weekly assignments will be posted on Canvas and are designed to exercise the skills and concepts covered that week. Assignments are due by the start of class on the following Wednesday, and late submissions may be subject to a 10% penalty.
 
-Students will publish completed assignments to their github.com repository and submit the repo link in Canvas. Successful submissions will build in Android Studio and run on the Android emulator or a mobile device without errors.
+Students will publish completed assignments to their github.com repository and submit the repo link in Canvas. Submissions should build successfully in Android Studio and run without errors on the Android device emulator or a mobile device.
 
 You may discuss how to approach tasks with other students in the class, but your submission must be your own work. Code submissions that are substantially identical would be considered cheating and subject to a markdown penalty.
 
