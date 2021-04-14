@@ -42,7 +42,7 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentService") {
 
         try {
             addresses = geocoder.getFromLocation(
-                    location.latitude,
+                    location!!.latitude,
                     location.longitude,
                     // In this sample, we get just a single address.
                     1)

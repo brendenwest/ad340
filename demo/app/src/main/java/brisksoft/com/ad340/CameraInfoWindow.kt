@@ -11,7 +11,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.camera_items.view.*
+//import kotlinx.android.synthetic.main.camera_items.view.*
 
 /** Demonstrates customizing the info window and/or its contents.  */
 class CameraInfoWindow (var mContext: Context) : InfoWindowAdapter  {
