@@ -36,7 +36,8 @@ Android Studio
 	- Intel HAX
     - SDK Tools
 - Project structure
-	- application name & domain
+    - https://developer.android.com/studio/projects
+	- application & package names
     - gradle configuration
 	- application manifest
 	- resources - layouts, values, images
@@ -45,3 +46,8 @@ Android Studio
     - Logcat
     - Terminal
     - Preferences
+
+Kotlin
+====
+
+- https://developer.android.com/courses/pathways/android-basics-kotlin-one
