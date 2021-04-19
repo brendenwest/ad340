@@ -5,7 +5,7 @@ AD 340 - Mobile Development
 Class Details
 ----
 
-- Location: Remote
+- Location: Virtual
 - Time: Wed 6:00 - 8:40pm
 - Dates: 4/5/2021 - 6/18/2021
 - Instructor: Brenden West | brenden.west@seattlecolleges.edu 
