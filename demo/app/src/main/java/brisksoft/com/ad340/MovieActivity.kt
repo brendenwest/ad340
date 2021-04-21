@@ -18,14 +18,16 @@ class MovieActivity : AppCompatActivity() {
         val b = this.intent.extras
         val movieData = b?.getStringArray(RecyclerActivity.EXTRA_MESSAGE)
 
-        val imageView = findViewById(R.id.movieImage) as ImageView
+        val imageView = findViewById(R.id.movieImageLarge) as ImageView
         val movieTitle = findViewById(R.id.movieTitle) as TextView
+        val movieDir = findViewById(R.id.movieDirector) as TextView
         val movieYear = findViewById(R.id.movieYear) as TextView
         val movieDesc = findViewById(R.id.movieDesc) as TextView
 
         if (movieData !== null) {
             movieTitle.text = movieData[0]
             movieYear.text = movieData[1]
+            movieDir.text = movieData[2]
             movieDesc.text = movieData[4]
             Picasso.get().load(movieData[3]).into(imageView);
         }

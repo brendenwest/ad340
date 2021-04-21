@@ -13,29 +13,39 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
-        android:text="title"
+        android:text=""
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/movieDirector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text=""
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movieTitle" />
+
+    <TextView
         android:id="@+id/movieYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:text="year"
+        android:layout_marginEnd="8dp"
+        android:text=""
         android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/movieTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/movieTitle"
+        app:layout_constraintBaseline_toBaselineOf="@+id/movieDirector"
+        app:layout_constraintLeft_toRightOf="@+id/movieDirector"
         app:layout_constraintRight_toRightOf="parent" />
 
     <ImageView
-        android:id="@+id/movieImage"
+        android:id="@+id/movieImageLarge"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="256dp"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@+id/movieTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/movieDirector"
+        />
 
     <TextView
         android:id="@+id/movieDesc"
@@ -45,7 +55,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="24dp"
         android:scrollbars="vertical"
-        android:text="desc"
-        app:layout_constraintTop_toBottomOf="@+id/movieImage" />
+        android:text=""
+        app:layout_constraintTop_toBottomOf="@+id/movieImageLarge" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

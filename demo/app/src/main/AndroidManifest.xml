@@ -17,7 +17,7 @@
             android:name=".TeamActivity"
             android:label="@string/title_activity_firebase"
             android:parentActivityName=".MainActivity"
-            ></activity>
+            />
         <activity
             android:name=".TrafficCamActivity"
             android:label="@string/title_activity_traffic_cam"
