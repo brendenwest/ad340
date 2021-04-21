@@ -1,18 +1,22 @@
+Android Navigation UI
+====
+
 Reading
 ----
-
-- https://developer.android.com/training/design-navigation/index.html
+- https://developer.android.com/guide/navigation/navigation-principles
 - https://developer.android.com/training/implementing-navigation/index.html
-
+- https://developer.android.com/training/appbar
 - https://developer.android.com/guide/topics/ui/menus.html 
-- https://developer.android.com/guide/topics/ui/dialogs.html 
 - https://developer.android.com/guide/topics/ui/ui-events.html
 
 Watch
 ----
-
 - Options menu tutorial - https://www.youtube.com/watch?v=EZ-sNN7UWFU 
 - Alert dialog tutorial - https://www.youtube.com/watch?v=xPYINCsIQVg&list
+
+Practice
+----
+- https://developer.android.com/codelabs/android-navigation#0
 
 Goals
 ----
@@ -72,10 +76,6 @@ Action Bar (Toolbar in support v7)
    - action provider (e.g. ShareActionProvider)
 
 
-
- * setup
- * can
-
 Menus
  - defined in XML
  - inflated w/ MenuInflater
@@ -107,14 +107,4 @@ Dialogs
 - Alert dialog has 3 customizable regions - title, content, & action buttons
 - can show list of options in content area
 - activities can implement a listener interface to receive dialog click events
-
-
-Practice
- - map out screen diagram w/ entities & relationships
- - add an About activity
- - implement a toolbar with menu items
- - set different menu options on main, about, and other child screens
- - add a contextual action bar one of your screens
- - enable a popup menu
- - enable a dialog w/ 'ok' & 'cancel' buttons
 

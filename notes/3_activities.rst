@@ -6,8 +6,9 @@ Reading
 
 - https://developer.android.com/guide/components/fundamentals.html
 - https://developer.android.com/guide/components/intents-filters.html
-- https://developer.android.com/guide/components/activities/index.html
+- https://developer.android.com/guide/components/activities/intro-activities
 - https://www.tutorialspoint.com/android/android_acitivities.htm 
+
 
 Goals
 ====
@@ -18,14 +19,12 @@ Goals
 - Navigate between activities, with & without messages
  
 
-Exercise
+Practice
 ====
-
-- https://developer.android.com/training/basics/firstapp/building-ui.html
 - https://developer.android.com/training/basics/firstapp/starting-activity.html
 
 
-Activities
+Notes
 ====
 
 Activities are main building block of Android applications and typically manage the UI of a single application screen. 
@@ -36,7 +35,6 @@ Activities are defined in the application's AndroidManifest.xml.
 
 An application's activities are loosely bound and have minimal dependencies. Individual activities can be started by other applications if so designed.
 
- 
 
 Activity Lifecycle
 ====
