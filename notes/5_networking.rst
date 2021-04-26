@@ -1,18 +1,13 @@
+Network Operations
+====
 
 Reading
 ----
-
-- https://developer.android.com/training/basics/network-ops/index.html
+- https://developer.android.com/guide/topics/connectivity
+- https://developer.android.com/training/basics/network-ops/
 - https://developer.android.com/training/volley/index.html
-- https://developer.android.com/training/id-auth/authenticate.html
-- https://developers.google.com/youtube/v3/quickstart/android (optional)
-- http://www.baeldung.com/jackson-vs-gson
-
-
-Watch
-----
-
-- https://developer.android.com/training/volley/index.html
+- https://developer.android.com/training/efficient-downloads/
+- https://github.com/google/gson/blob/master/UserGuide.md
 
 Sample app
 ----
@@ -21,10 +16,13 @@ https://github.com/googlesamples/android-NetworkConnect
 Goals
 ----
 
-- connect a network
-- perform network operations
-- monitor device network status
-- load & parse XML or JSON data
+Understand Android best practices for:
+
+- connecting to a network
+- performing asynchronous network operations
+- monitoring device network status
+- loading & parsing XML or JSON data
+- Mapping data to Java objects & vice versa
 
 
 Android Networking
@@ -34,11 +32,13 @@ The Android SDK enables applications to perform network operations, but with som
 
 Network requests must be made off the main UI thread, and the application manifest must include these permissions:
 
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+::
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 Network operations should also:
 
+- check network connectivity
 - ensure application data security,
 - minimize network usage
 - optimize battery consumption
@@ -78,7 +78,7 @@ Before you perform network operations, it's good practice to check the state of 
 - ConnectivityManager: Answers queries about the state of network connectivity. It also notifies applications when network connectivity changes.
 - NetworkInfo: Describes the status of a network interface of a given type (currently either Mobile or Wi-Fi).
 
-With Android 7.0, apps can be notified of Data Saver restrictions the user has set on background/foreground data operations.
+Since Android 7.0, apps can be notified of Data Saver restrictions the user has set on background/foreground data operations.
 
 
 Parsing Data
@@ -89,6 +89,17 @@ Apps can use XmlPullParser to parse an XML response. The parser extracts data fo
 Parse routine should be wrapped in aa try ... catch block to handle parsing exceptions.
 
 XML parsing is a forward-only read operation and supports just a sub-set of XML DOM methods.
+
+JSON parsing is somewhat simpler, using classes provided in the Android SDK as described here - https://www.tutorialspoint.com/android/android_json_parser.htm (Links to an external site.)
+
+Object Mapping
+----
+Applications working with network data often need to convert network response data to Java objects or vice versa.
+
+- **Deserialization** - converts network response input into Java objects
+- **Serialization** - converts Java objects to string output for submission on a network request
+
+Android developers will often use either `Gson<https://github.com/google/gson>`_ or `Jackson<http://tutorials.jenkov.com/java-json/jackson-objectmapper.html>`_  for serialization/deserialization.
 
 Network Optimization
 ----
@@ -101,35 +112,11 @@ Network Optimization
 - cache files locally
 - Use the HttpsURLConnection Response Cache
 
-Object Mapping
-----
-
-- Deserialization converts JSON input into Java objects
-- Serialization converts Java objects to JSON output
-
-Common libraries - Gson, Jackson
-- http://www.baeldung.com/jackson-vs-gson
-
-
-
-Terms
-----
-- request queue
-- main (UI) thread
-- worker thread
-- singleton
-- Gson
-
-
-Practice
-----
-
-- load HTML from network & display in textview
-- load JSON from network & update a list/recycler view
-- load image from url
-
 Helper Libraries
 ----
 
+- https://github.com/google/gson
+- https://github.com/FasterXML/jackson
 - https://github.com/bumptech/glide
 - http://square.github.io/okhttp/ 
+- https://square.github.io/picasso/

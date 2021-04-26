@@ -7,7 +7,9 @@ Reading
 - https://developer.android.com/guide/components/fundamentals.html
 - https://developer.android.com/guide/components/intents-filters.html
 - https://developer.android.com/guide/components/activities/intro-activities
-- https://www.tutorialspoint.com/android/android_acitivities.htm 
+- https://developer.android.com/training/basics/firstapp/starting-activity
+- https://developer.android.com/guide/fragments
+- https://www.tutorialspoint.com/android/android_acitivities.htm
 
 
 Goals
@@ -16,7 +18,8 @@ Goals
 - Understand Android Activities & Intents
 - Understand the Activity life cycle
 - Define new activities & intents in the application manifest 
-- Navigate between activities, with & without messages
+- Navigate between activities
+- Understand Android Fragments
  
 
 Practice
@@ -54,7 +57,7 @@ Activities progress through a 'lifecycle' when launched, or removed, or during c
 
 Stopped or paused activities may be restarted with the state they had when stopped.
 
-Intents - https://developer.android.com/guide/components/intents-filters.html (Links to an external site.)Links to an external site. 
+Intents - https://developer.android.com/guide/components/intents-filters.html
 
 Android activities are launched via intents - a message object that describes the activity to start and carries any necessary data.
 
