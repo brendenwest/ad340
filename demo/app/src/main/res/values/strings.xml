@@ -18,7 +18,7 @@
     <string name="demo_list_header">Washington Cities</string>
     <string name="title_activity_detail">Detail</string>
     <string name="title_activity_recycler">Movies w/ RecyclerView</string>
-    <string name="title_activity_recycler_web">Seattle Traffic Cameras</string>
+    <string name="title_activity_recycler_web">Traffic Cameras (Java)</string>
     <string name="title_activity_list">Simple ListView</string>
     <string name="title_activity_about">About</string>
     <string name="title_activity_chat">Chat</string>
@@ -28,8 +28,8 @@
     <string name="title_activity_firebase">AD340 Team</string>
     <string name="saved_text_entry">text_entry</string>
     <string name="title_activity_traffic_cam_map">Traffic Cam Map</string>
-    <string name="title_activity_movie_list">Movies w/ ListView</string>
-    <string name="title_activity_traffic_cam">Traffic Cameras</string>
+    <string name="title_activity_movie_list">Zombie Movies</string>
+    <string name="title_activity_traffic_cam">Traffic Cameras (Kt)</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 public class MovieListActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.brisksoft.ad340.MESSAGE";
@@ -32,7 +34,7 @@ public class MovieListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         movieList = findViewById(R.id.movieList1);
         MovieListAdapter adapter = new MovieListAdapter(this, movies);
@@ -79,5 +81,18 @@ public class MovieListActivity extends AppCompatActivity {
 
             return rowView;
         }
+    }
+
+    protected void onPause() {
+        super.onPause();
+        Log.d("DEBUG", "pausing movie list");
+    }
+    protected void onStop() {
+        super.onStop();
+        Log.d("DEBUG", "stopping movie list");
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("DEBUG", "destroying movie list");
     }
 }

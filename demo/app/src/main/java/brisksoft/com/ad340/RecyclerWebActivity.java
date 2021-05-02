@@ -35,8 +35,6 @@ public class RecyclerWebActivity extends AppCompatActivity {
     RecyclerView.Adapter recyclerViewAdapter;
     RecyclerView.LayoutManager recylerViewLayoutManager;
 
-    String url = " https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2";
-
     List<TrafficCam> cameraList = new ArrayList<>();
 
     @Override
@@ -62,7 +60,7 @@ public class RecyclerWebActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonReq = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                (Request.Method.GET, TrafficCam.Companion.getDataUrl(), null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("CAMERAS", response.toString());

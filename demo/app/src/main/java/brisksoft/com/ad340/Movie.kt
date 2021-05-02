@@ -56,7 +56,7 @@ class Movie {
                 "Zombieland",
                 "2009",
                 "Ruben Fleischer",
-                "https://cdn.collider.com/wp-content/uploads/Zombieland-movie-image-Woody-Harrelson-Jesse-Eisenberg-1.jpg",
+                "https://static1.colliderimages.com/wordpress/wp-content/uploads/2020/10/zombieland-jesse-eisenberg-social-feature.jpg?q=50&fit=crop&w=750&dpr=1.5",
                 "One of the greatest enjoyments of horror cinema in the last few decades has been watching filmmakers who grew up knowing the rules of the genre find new and exciting ways to subvert them. Shaun of the Dead is the gold star of self-referential cinematic love letters, but Ruben Fleischer’s Zombieland is a rollicking comedy horror in its own right.\nZombieland arrived in theaters in 2009, towards the end of a new zombie boom, and it’s a film made for audiences who already know the rules and want to have some fun playing the game. The script comes from Deadpool screenwriters Reese and Wernick, and both properties share the duo’s knack for genre deconstruction and razor-sharp, smart-mouthed humor. The ensemble comedic performers has a blast doling out verbal beatdowns in between actually beating down the undead. And let’s be honest — even if Zombieland wasn’t an all-around fun and entertaining action horror, it deserves a spot on the list for giving BIll Murray the most Bill Murray cameo of all time. — Haleigh Foutch"
             ),
             arrayOf(

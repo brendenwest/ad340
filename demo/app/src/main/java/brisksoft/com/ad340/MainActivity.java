@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private TextToSpeech tts;
 
     // Array of strings...
-    String[] demoArray = {"Cities", "Movies 1", "Movies 2", "Traffic Cams kt", "Traffic Cams java", "Location", "Map w/ markers", "Text2Speech" };
+    String[] demoArray = {"Cities", "Movies 1", "Movies 2", "Traffic Cams (Java)", "Traffic Cams (Kt))", "Location", "Map w/ markers", "Text2Speech" };
 
     // helper class to manage writing to SharedPreferences.
     private SharedPreferencesHelper mSharedPreferencesHelper;
