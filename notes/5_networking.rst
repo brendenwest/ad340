@@ -8,10 +8,11 @@ Reading
 - https://developer.android.com/training/volley/index.html
 - https://developer.android.com/training/efficient-downloads/
 - https://github.com/google/gson/blob/master/UserGuide.md
+- https://docs.google.com/presentation/d/1osOpeT2U4JnJpSP4YUk7SJ6qAsqxm4FIRw0q6CEvLRo/edit
 
-Sample app
+Practice
 ----
-https://github.com/googlesamples/android-NetworkConnect
+- https://developer.android.com/codelabs/kotlin-android-training-internet-data#0
 
 Goals
 ----
