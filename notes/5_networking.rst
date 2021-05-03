@@ -16,7 +16,6 @@ Practice
 
 Goals
 ----
-
 Understand Android best practices for:
 
 - connecting to a network
