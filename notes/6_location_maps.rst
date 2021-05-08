@@ -38,12 +38,12 @@ High accuracy and frequent updates incur a power consumption cost.
 Permissions
 ----
 Android applications must specify their location requirements in the AndroidManifest.xml. Android provides different permissions for different granularities of location:
-
 ::
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-COARSE_LOCATION = accuracy to within a city block
-FINE_LOCATION = accuracy can be within a few meters. requires more
+- COARSE_LOCATION = accuracy to within a city block
+- FINE_LOCATION = accuracy can be within a few meters. requires more
 
 Android 10+ requires apps to request location permissions at run-time, so apps need to account for this possibility.
 
