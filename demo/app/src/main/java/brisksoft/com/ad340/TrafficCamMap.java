@@ -51,8 +51,7 @@ public class TrafficCamMap extends AppCompatActivity implements OnMapReadyCallba
     private Location mLastLocation;
     private GoogleMap mMap;
 
-    private final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 9;
-
+    private final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 9;
 
     List<TrafficCam> cameraList = new ArrayList<>();
 
@@ -82,7 +81,7 @@ public class TrafficCamMap extends AppCompatActivity implements OnMapReadyCallba
 
     public void getLocation() {
         Log.d("LOCATION","getLocation");
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED){
             Log.d("LOCATION","permissionGranted");
             mFusedLocationClient.getLastLocation()
@@ -103,7 +102,7 @@ public class TrafficCamMap extends AppCompatActivity implements OnMapReadyCallba
             Log.d("LOCATION","permissionNotGranted");
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
@@ -115,8 +114,8 @@ public class TrafficCamMap extends AppCompatActivity implements OnMapReadyCallba
                 Log.d("LOCATION","requestPermission");
 
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
 
             }
         }
@@ -128,7 +127,7 @@ public class TrafficCamMap extends AppCompatActivity implements OnMapReadyCallba
                                            String permissions[], int[] grantResults) {
         Log.d("LOCATION","onRequestPermissionsResult");
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+            case MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

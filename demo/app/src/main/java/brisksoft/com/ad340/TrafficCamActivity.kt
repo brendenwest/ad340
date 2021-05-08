@@ -72,7 +72,7 @@ class TrafficCamActivity : AppCompatActivity() {
             Log.d("CAMERAS 1", response.toString())
             try {
                 val features = response.getJSONArray("Features") // top-level node
-                for (i in 1 until features.length()) {
+                for (i in 0 until features.length()) {
                     val point = features.getJSONObject(i)
                     val pointCoords = point.getJSONArray("PointCoordinate")
                     val coords = doubleArrayOf(pointCoords.getDouble(0), pointCoords.getDouble(1))

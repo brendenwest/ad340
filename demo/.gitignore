@@ -8,5 +8,4 @@ gradle/
 build/
 /captures
 .externalNativeBuild
-secrets.xml
-/hw
+google-services.json

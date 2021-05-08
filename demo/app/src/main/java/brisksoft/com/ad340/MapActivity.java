@@ -31,6 +31,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.util.Objects;
+
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private FusedLocationProviderClient mFusedLocationClient;
@@ -40,7 +42,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private Location mLastLocation;
     private GoogleMap mMap;
 
-    private final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 9;
+    private final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 9;
     protected boolean mAddressRequested;
     protected String mAddressOutput;
 
@@ -55,16 +57,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         mAddressRequested = true;
         mAddressOutput = "";
 
-        mLatitudeText = (TextView) findViewById(R.id.textLatitude);
-        mLongitudeText = (TextView) findViewById(R.id.textLongitude);
-        mLocationText = (TextView) findViewById(R.id.textLocation);
+        mLatitudeText = findViewById(R.id.textLatitude);
+        mLongitudeText = findViewById(R.id.textLongitude);
+        mLocationText = findViewById(R.id.textLocation);
 
         // Get the SupportMapFragment and request notification
         // when the map is ready to be used.
@@ -93,7 +95,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     mLastLocation = location;
                     updateUI();
                 }
-            };
+            }
         };
     }
 
@@ -103,7 +105,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     public void getLocation() {
         Log.d("LOCATION","getLocation");
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 ==PackageManager.PERMISSION_GRANTED){
             Log.d("LOCATION","permissionGranted");
             mFusedLocationClient.getLastLocation()
@@ -124,7 +126,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             Log.d("LOCATION","permissionNotGranted");
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
@@ -136,8 +138,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 Log.d("LOCATION","requestPermission");
 
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
 
             }
         }
@@ -149,7 +151,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                            String permissions[], int[] grantResults) {
         Log.d("LOCATION","onRequestPermissionsResult");
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+            case MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -162,7 +164,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
-                return;
             }
         }
     }
@@ -213,7 +214,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     protected void startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest,
                     mLocationCallback,
