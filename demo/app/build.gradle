@@ -23,12 +23,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    task copySecrets(type: Copy) {
-        from '.'
-        into '.'
-        include('google-services_secret.json')
-        rename ('google-services_secret.json', 'google-services.json')
-    }
 }
 
 dependencies {
@@ -60,4 +54,3 @@ apply plugin: 'com.google.gms.google-services'
 repositories {
     mavenCentral()
 }
-preBuild.dependsOn(copySecrets)
