@@ -39,7 +39,6 @@ https://www.tutorialspoint.com/how-to-request-location-permission-at-runtime-on-
 class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var mMap: GoogleMap? = null
-    private var cameraList: MutableList<TrafficCam> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +63,9 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
             checkLocationPermission()
 
             // load markers data
-            loadCameraData(TrafficCam.dataUrl)
+            TrafficCam.loadCameraData(applicationContext) { data ->
+                showMarkers(data)
+            }
         }
 
     }
@@ -132,38 +133,6 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-    /**
-     * Loads camera data
-     */
-    private fun loadCameraData(dataUrl: String?) {
-        val queue = Volley.newRequestQueue(this)
-        val jsonReq = JsonObjectRequest(Request.Method.GET, dataUrl, null, { response ->
-            Log.d("CAMERAS", response.toString())
-            try {
-                val features = response.getJSONArray("Features") // top-level node
-                for (i in 1 until features.length()) {
-                    val point = features.getJSONObject(i)
-                    val pointCoords = point.getJSONArray("PointCoordinate")
-
-                    // points may have more than one camera
-                    val camera = point.getJSONArray("Cameras").getJSONObject(0)
-                    val c = TrafficCam(
-                        camera.getString("Description"),
-                        camera.getString("ImageUrl"),
-                        camera.getString("Type"),
-                        doubleArrayOf(pointCoords.getDouble(0), pointCoords.getDouble(1))
-                    )
-                    cameraList.add(c)
-                }
-                // trigger display of map markers
-                showMarkers()
-            } catch (e: JSONException) {
-            }
-        }) { error -> Log.d("JSON", "Error: " + error.message) }
-        // Add the request to the RequestQueue.
-        queue.add(jsonReq)
-    }
-
     private fun updateMap(location: Location?) {
         Log.d("LOCATION", "updateMap")
         if (location != null) {
@@ -187,7 +156,7 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
     /**
      * Load camera data into map markers
      */
-    private fun showMarkers() {
+    private fun showMarkers(cameraList: List<TrafficCam>) {
         Log.d("LOCATION", "show markers")
         for (camera in cameraList) {
             mMap?.apply {
