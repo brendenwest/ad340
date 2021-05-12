@@ -13,6 +13,7 @@ Reading
 Practice
 ----
 - https://developers.google.com/maps/documentation/android-sdk/map-with-marker
+- https://developers.google.com/codelabs/maps-platform/maps-platform-101-android#0
 
 Learning Outcomes
 ----
