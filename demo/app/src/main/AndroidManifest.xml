@@ -15,15 +15,13 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".TeamActivity"
+            android:name=".FirebaseActivity"
             android:label="@string/title_activity_firebase"
-            android:parentActivityName=".MainActivity"
-            />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".TrafficCamActivity"
             android:label="@string/title_activity_traffic_cam"
-            android:parentActivityName=".MainActivity"
-            />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MovieListActivity"
             android:label="@string/title_activity_movie_list"
@@ -32,10 +30,10 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
+
         <service
             android:name=".FetchAddressIntentService"
             android:exported="false" />
@@ -45,6 +43,7 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -71,13 +70,11 @@
         <activity
             android:name=".MovieActivity"
             android:label="@string/title_activity_movie"
-            android:parentActivityName=".RecyclerActivity"
-            />
+            android:parentActivityName=".RecyclerActivity" />
         <activity
             android:name=".TrafficCamMap"
             android:label="@string/title_activity_traffic_cam_map"
-            android:parentActivityName=".MainActivity"
-             />
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

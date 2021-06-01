@@ -1,9 +1,11 @@
 package brisksoft.com.ad340
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
+import android.location.LocationProvider
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -38,7 +40,10 @@ https://www.tutorialspoint.com/how-to-request-location-permission-at-runtime-on-
 */
 class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var mMap: GoogleMap? = null
+    private var map: GoogleMap? = null
+    private val defaultLocation = Location(LocationManager.GPS_PROVIDER)
+    private var locationPermissionGranted = false
+    private var lastKnownLocation: Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,31 +54,20 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
 
         // initialize location client
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        defaultLocation.latitude = 47.6060531
+        defaultLocation.longitude = -122.3321
 
         // Load MapFragment and request map-ready notification
-        val mapFragment = supportFragmentManager.findFragmentById(
-            R.id.map_fragment
-        ) as? SupportMapFragment
-        mapFragment?.getMapAsync { googleMap ->
-            // store map object for use once location is available
-            mMap = googleMap
-            Log.d("LOCATION", "has map")
-
-            // check for user's location
-            checkLocationPermission()
-
-            // load markers data
-            TrafficCam.loadCameraData(applicationContext) { data ->
-                showMarkers(data)
-            }
-        }
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
 
     }
 
     private fun checkLocationPermission() {
         Log.d("LOCATION", "checkPermission")
         // Check if the Location permission has been granted
-        if ( ContextCompat.checkSelfPermission(this@TrafficCamMap, ACCESS_COARSE_LOCATION) ==
+        if ( ContextCompat.checkSelfPermission(this@TrafficCamMap, ACCESS_FINE_LOCATION) ==
             PackageManager.PERMISSION_GRANTED) {
             Log.d("LOCATION", "already granted")
             // Permission is already available. Get user's location
@@ -82,14 +76,6 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
                     // Got last known location. In some rare situations this can be null.
                     Log.d("LOCATION", location.toString())
 
-                    // temp hard-code for Seattle
-                    if (location == null) {
-                        val tmpLocation = Location(LocationManager.GPS_PROVIDER)
-                        tmpLocation.latitude = 47.6060531
-                        tmpLocation.longitude = -122.3321
-                        updateMap(tmpLocation)
-                    }
-
                     updateMap(location)
                 }
 
@@ -97,12 +83,12 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
             // Permission is missing and must be requested.
             Log.d("LOCATION", "should request")
             if (ActivityCompat.shouldShowRequestPermissionRationale(this@TrafficCamMap,
-                    ACCESS_COARSE_LOCATION)) {
+                    ACCESS_FINE_LOCATION)) {
                 ActivityCompat.requestPermissions(this@TrafficCamMap,
-                    arrayOf(ACCESS_COARSE_LOCATION), PERMISSION_REQUEST_LOCATION)
+                    arrayOf(ACCESS_FINE_LOCATION), PERMISSION_REQUEST_LOCATION)
             } else {
                 ActivityCompat.requestPermissions(this@TrafficCamMap,
-                    arrayOf(ACCESS_COARSE_LOCATION), PERMISSION_REQUEST_LOCATION)
+                    arrayOf(ACCESS_FINE_LOCATION), PERMISSION_REQUEST_LOCATION)
             }
         }
     }
@@ -121,7 +107,7 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
                 fusedLocationClient.lastLocation
                     .addOnSuccessListener { location : Location? ->
                         // Got last known location. In some rare situations this can be null.
-                        Log.d("LOCATION2", location.toString())
+                        locationPermissionGranted = true
                         updateMap(location)
                     }
 
@@ -132,13 +118,44 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    /**
+     * Gets the current location of the device, and positions the map's camera.
+     */
+    // [START maps_current_place_get_device_location]
+    private fun getDeviceLocation() {
+        /*
+         * Get the best and most recent location of the device, which may be null in rare
+         * cases when a location is not available.
+         */
+        try {
+            if (locationPermissionGranted) {
+                val locationResult = fusedLocationClient.lastLocation
+                locationResult.addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Set the map's camera position to the current location of the device.
+                        lastKnownLocation = task.result
+                        updateMap(lastKnownLocation)
+
+                    } else {
+                        Log.d(TAG, "Current location is null. Using defaults.")
+                        Log.e(TAG, "Exception: %s", task.exception)
+                        updateMap(defaultLocation)
+                        map?.uiSettings?.isMyLocationButtonEnabled = false
+                    }
+                }
+            }
+        } catch (e: SecurityException) {
+            Log.e("Exception: %s", e.message, e)
+        }
+    }
+    // [END maps_current_place_get_device_location]
 
     private fun updateMap(location: Location?) {
         Log.d("LOCATION", "updateMap")
         if (location != null) {
             Log.d("LOCATION", "move map")
-            mMap?.setMinZoomPreference(12f) // zoom to city level
-            mMap?.apply {
+            map?.setMinZoomPreference(12f) // zoom to city level
+            map?.apply {
                 val position = LatLng(location.latitude, location.longitude)
                 addMarker(
                     MarkerOptions()
@@ -159,7 +176,7 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
     private fun showMarkers(cameraList: List<TrafficCam>) {
         Log.d("LOCATION", "show markers")
         for (camera in cameraList) {
-            mMap?.apply {
+            map?.apply {
                 val position = LatLng(camera.coords[0], camera.coords[1])
                 addMarker(
                     MarkerOptions()
@@ -177,8 +194,26 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onMapReady(p0: GoogleMap) {
-        TODO("Not yet implemented")
+    override fun onMapReady(googleMap: GoogleMap) {
+        // store map object for use once location is available
+        map = googleMap
+        Log.d("LOCATION", "has map")
+
+        // check for user's location
+        checkLocationPermission()
+
+        // Get the current location of the device and set the position of the map.
+        getDeviceLocation()
+
+        // load markers data
+        TrafficCam.loadCameraData(applicationContext) { data ->
+            showMarkers(data)
+        }
+    }
+
+    companion object {
+        private val TAG = TrafficCamMap::class.java.simpleName
+        private const val DEFAULT_ZOOM = 13
     }
 
 }

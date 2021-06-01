@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private TextToSpeech tts;
 
     // Array of strings...
-    String[] demoArray = {"Cities", "Movies 1", "Movies 2", "Traffic Cams (Java)", "Traffic Cams (Kt))", "Location", "Map w/ markers", "Text2Speech" };
+    String[] demoArray = {"Cities", "Movies 1", "Movies 2", "Traffic Cams (Java)", "Traffic Cams (Kt))", "Location", "Map w/ markers" };
 
     // helper class to manage writing to SharedPreferences.
     private SharedPreferencesHelper mSharedPreferencesHelper;
@@ -140,16 +140,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void signIn() {
         Log.d("FIREBASE", "signIn");
-        String name = mNameField.getText().toString();
+        String displayname = mNameField.getText().toString();
         String email = mEmailField.getText().toString();
         String password = mPasswordField.getText().toString();
 
-        if (!validateForm(name, email, password)) {
+        if (!validateForm(displayname, email, password)) {
             return;
         }
 
         // store shared preferences
-        mSharedPreferencesHelper.saveEntry("name", name);
+        mSharedPreferencesHelper.saveEntry("name", displayname);
         mSharedPreferencesHelper.saveEntry("email", email);
         mSharedPreferencesHelper.saveEntry("password", password);
 
@@ -161,10 +161,10 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("FIREBASE", "signIn:onComplete:" + task.isSuccessful());
 
                         if (task.isSuccessful()) {
-                            // update profile
+                            // update profile. displayname is the value entered in UI
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(mNameField.getText().toString())
+                                    .setDisplayName(displayname)
                                     .build();
 
                             user.updateProfile(profileUpdates)
@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                                             if (task.isSuccessful()) {
                                                 Log.d("FIREBASE", "User profile updated.");
                                                 // Go to FirebaseActivity
-                                                startActivity(new Intent(MainActivity.this, TeamActivity.class));
+                                                startActivity(new Intent(MainActivity.this, FirebaseActivity.class));
                                             }
                                         }
                                     });
@@ -219,6 +219,10 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public boolean passwordIsValid(String str) {
+        return str.length() > 0;
     }
 
     private boolean validateForm(String userName, String email, String password) {

@@ -19,14 +19,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
-public class TeamActivity extends AppCompatActivity {
+public class FirebaseActivity extends AppCompatActivity {
 
-    private static final String TAG = TeamActivity.class.getSimpleName();
+    private static final String TAG = FirebaseActivity.class.getSimpleName();
 
     private DatabaseReference myRef;
 
@@ -37,7 +39,7 @@ public class TeamActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team);
+        setContentView(R.layout.activity_firebase);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -52,22 +54,26 @@ public class TeamActivity extends AppCompatActivity {
 
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         myRef = mDatabase.getReference("users");
+        Query members = myRef.orderByChild("updated");
 
         // update database
+        assert currentUser != null;
         writeNewUser(currentUser.getUid(), currentUser.getDisplayName(), currentUser.getEmail());
 
         // get list of users
-        myRef.addValueEventListener(new ValueEventListener() {
+        members.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("FIREBASE", "onDataChange");
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
-                    // TODO: handle the post
-                    Log.d(TAG, userSnapshot.getValue().toString());
-                    String key = userSnapshot.getKey();
-
-                    User user = new User(userSnapshot.child("username").getValue().toString(), userSnapshot.child("email").getValue().toString(), userSnapshot.child("updated").getValue().toString());
-                    userData.add(user);
+                    Object username = userSnapshot.child("username").getValue();
+                    if (username != null) {
+                        User user = new User(username.toString(), userSnapshot.child("email").getValue().toString(), userSnapshot.child("updated").getValue().toString());
+                        userData.add(user);
+                    }
                 }
+                // Firebase doesn't support sort in descending order. Have to reverse in java
+                Collections.reverse(userData);
                 listAdapter.notifyDataSetChanged();
             }
 
@@ -87,7 +93,7 @@ public class TeamActivity extends AppCompatActivity {
     }
 
     @IgnoreExtraProperties
-    public class User {
+    public static class User {
 
         public String username;
         public String email;
@@ -105,9 +111,9 @@ public class TeamActivity extends AppCompatActivity {
 
     }
 
-    private class UserListAdapter extends ArrayAdapter<User> {
+    private static class UserListAdapter extends ArrayAdapter<User> {
         private final Context context;
-        private ArrayList<User> values;
+        private final ArrayList<User> values;
 
         private UserListAdapter(Context context, ArrayList<User> values) {
             super(context, 0, values);
@@ -123,7 +129,7 @@ public class TeamActivity extends AppCompatActivity {
             TextView title = rowView.findViewById(R.id.item_title);
             title.setText(values.get(position).username);
             TextView subtitle = rowView.findViewById(R.id.item_subtitle);
-            subtitle.setText("Updated: " + values.get(position).updated);
+            subtitle.setText(String.format("Updated: %s", values.get(position).updated));
 
             return rowView;
         }

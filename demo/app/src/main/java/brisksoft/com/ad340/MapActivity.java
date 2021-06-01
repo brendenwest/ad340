@@ -76,7 +76,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         createLocationCallback();
-        getLocation();
 
     }
 
@@ -173,6 +172,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // store map object for use once location is available
         mMap = googleMap;
         Log.d("LOCATION","onMapReady");
+        getLocation();
+
     }
 
 
