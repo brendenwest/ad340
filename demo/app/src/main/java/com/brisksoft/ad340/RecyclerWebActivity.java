@@ -1,4 +1,4 @@
-package brisksoft.com.ad340;
+package com.brisksoft.ad340;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.squareup.picasso.Picasso;
+
+import com.brisksoft.ad340.R;
 
 public class RecyclerWebActivity extends AppCompatActivity {
 

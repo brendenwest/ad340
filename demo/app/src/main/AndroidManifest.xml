@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="brisksoft.com.ad340">
+    package="com.brisksoft.ad340">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -15,17 +15,17 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".FirebaseActivity"
+            android:name="com.brisksoft.ad340.FirebaseActivity"
             android:label="@string/title_activity_firebase"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.brisksoft.ad340.MainActivity" />
         <activity
-            android:name=".TrafficCamActivity"
+            android:name="com.brisksoft.ad340.TrafficCamActivity"
             android:label="@string/title_activity_traffic_cam"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.brisksoft.ad340.MainActivity" />
         <activity
-            android:name=".MovieListActivity"
+            android:name="com.brisksoft.ad340.MovieListActivity"
             android:label="@string/title_activity_movie_list"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.brisksoft.ad340.MainActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -35,12 +35,12 @@
             android:value="${MAPS_API_KEY}" />
 
         <service
-            android:name=".FetchAddressIntentService"
+            android:name="com.brisksoft.ad340.FetchAddressIntentService"
             android:exported="false" />
 
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:exported="true"
+            android:name="com.brisksoft.ad340.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,33 +48,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecyclerWebActivity"
+            android:name="com.brisksoft.ad340.RecyclerWebActivity"
             android:label="@string/title_activity_recycler_web"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.brisksoft.ad340.MainActivity" />
         <activity
-            android:name=".RecyclerActivity"
+            android:name="com.brisksoft.ad340.RecyclerActivity"
             android:label="@string/title_activity_recycler"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.brisksoft.ad340.MainActivity" />
         <activity
-            android:name=".ListActivity"
+            android:name="com.brisksoft.ad340.ListActivity"
             android:label="@string/title_activity_list"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.brisksoft.ad340.MainActivity" />
         <activity
-            android:name=".AboutActivity"
+            android:name="com.brisksoft.ad340.AboutActivity"
             android:label="@string/title_activity_about"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.brisksoft.ad340.MainActivity" />
         <activity
-            android:name=".MapActivity"
+            android:name="com.brisksoft.ad340.MapActivity"
             android:label="@string/title_activity_map"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.brisksoft.ad340.MainActivity" />
         <activity
-            android:name=".MovieActivity"
+            android:name="com.brisksoft.ad340.MovieActivity"
             android:label="@string/title_activity_movie"
-            android:parentActivityName=".RecyclerActivity" />
+            android:parentActivityName="com.brisksoft.ad340.RecyclerActivity" />
         <activity
-            android:name=".TrafficCamMap"
+            android:name="com.brisksoft.ad340.TrafficCamMap"
             android:label="@string/title_activity_traffic_cam_map"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.brisksoft.ad340.MainActivity" />
     </application>
 
 </manifest>

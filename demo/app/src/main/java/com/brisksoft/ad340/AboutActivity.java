@@ -1,4 +1,4 @@
-package brisksoft.com.ad340;
+package com.brisksoft.ad340;
 
 import android.os.Bundle;
 
@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.brisksoft.ad340.R;
 
 public class AboutActivity extends AppCompatActivity {
 

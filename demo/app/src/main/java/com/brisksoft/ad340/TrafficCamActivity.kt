@@ -1,7 +1,6 @@
-package brisksoft.com.ad340
+package com.brisksoft.ad340
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +10,8 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
+import com.brisksoft.ad340.R
 import com.squareup.picasso.Picasso
-import org.json.JSONException
-import java.util.*
 
 class TrafficCamActivity : AppCompatActivity() {
     var cameraList: ListView? = null

@@ -1,11 +1,9 @@
-package brisksoft.com.ad340
+package com.brisksoft.ad340
 
-import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
-import android.location.LocationProvider
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -13,16 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
+import com.brisksoft.ad340.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import org.json.JSONException
 import java.util.*
 
 const val PERMISSION_REQUEST_LOCATION = 9
@@ -85,10 +80,12 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this@TrafficCamMap,
                     ACCESS_FINE_LOCATION)) {
                 ActivityCompat.requestPermissions(this@TrafficCamMap,
-                    arrayOf(ACCESS_FINE_LOCATION), PERMISSION_REQUEST_LOCATION)
+                    arrayOf(ACCESS_FINE_LOCATION), PERMISSION_REQUEST_LOCATION
+                )
             } else {
                 ActivityCompat.requestPermissions(this@TrafficCamMap,
-                    arrayOf(ACCESS_FINE_LOCATION), PERMISSION_REQUEST_LOCATION)
+                    arrayOf(ACCESS_FINE_LOCATION), PERMISSION_REQUEST_LOCATION
+                )
             }
         }
     }

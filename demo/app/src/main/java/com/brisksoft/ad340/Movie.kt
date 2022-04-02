@@ -1,4 +1,4 @@
-package brisksoft.com.ad340
+package com.brisksoft.ad340
 
 import android.content.Context
 import android.content.Intent

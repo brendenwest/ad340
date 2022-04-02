@@ -1,4 +1,4 @@
-package brisksoft.com.ad340;
+package com.brisksoft.ad340;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -25,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+
+import com.brisksoft.ad340.R;
 
 public class FirebaseActivity extends AppCompatActivity {
 

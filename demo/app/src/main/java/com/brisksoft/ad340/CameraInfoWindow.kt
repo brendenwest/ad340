@@ -1,4 +1,4 @@
-package brisksoft.com.ad340
+package com.brisksoft.ad340
 
 import android.content.Context
 import android.view.View;
@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
-import brisksoft.com.ad340.R.id.parent
+import com.brisksoft.ad340.R
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter
 import com.squareup.picasso.Callback

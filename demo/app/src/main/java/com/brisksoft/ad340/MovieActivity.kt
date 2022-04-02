@@ -1,9 +1,10 @@
-package brisksoft.com.ad340
+package com.brisksoft.ad340
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.TextView
+import com.brisksoft.ad340.R
 
 import com.squareup.picasso.Picasso
 

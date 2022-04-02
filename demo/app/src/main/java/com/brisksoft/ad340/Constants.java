@@ -1,4 +1,4 @@
-package brisksoft.com.ad340;
+package com.brisksoft.ad340;
 
 /**
  * Constant values reused in this sample.
@@ -9,7 +9,7 @@ public final class Constants {
     public static final int FAILURE_RESULT = 1;
 
     public static final String PACKAGE_NAME =
-            "brisksoft.com.ad340";
+            "com.brisksoft.ad340";
 
     public static final String RECEIVER = PACKAGE_NAME + ".RECEIVER";
 

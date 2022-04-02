@@ -1,4 +1,4 @@
-package brisksoft.com.ad340;
+package com.brisksoft.ad340;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
+
+import com.brisksoft.ad340.R;
 
 public class MovieListActivity extends AppCompatActivity {
 

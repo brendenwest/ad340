@@ -1,4 +1,4 @@
-package brisksoft.com.ad340
+package com.brisksoft.ad340
 
 import android.app.IntentService
 import android.content.ContentValues.TAG
@@ -9,6 +9,7 @@ import android.location.Location
 import android.os.Bundle
 import android.os.ResultReceiver
 import android.util.Log
+import com.brisksoft.ad340.R
 import java.io.IOException
 import java.util.*
 
@@ -36,7 +37,8 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentService") {
 
         // Get the location passed to this service through an extra.
         val location = intent.getParcelableExtra<Location>(
-                Constants.LOCATION_DATA_EXTRA)
+            Constants.LOCATION_DATA_EXTRA
+        )
 
         var addresses: List<Address> = emptyList()
 
@@ -72,7 +74,8 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentService") {
                 (0..maxAddressLineIndex).map { getAddressLine(it) }
             }
             Log.i(TAG, getString(R.string.address_found))
-            deliverResultToReceiver(Constants.SUCCESS_RESULT,
+            deliverResultToReceiver(
+                Constants.SUCCESS_RESULT,
                     addressFragments.joinToString(separator = "\n"))
         }
     }

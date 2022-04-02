@@ -1,4 +1,4 @@
-package brisksoft.com.ad340;
+package com.brisksoft.ad340;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.brisksoft.ad340.R;
 
 public class ListActivity extends AppCompatActivity {
     // Array of strings
