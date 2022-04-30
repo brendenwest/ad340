@@ -31,8 +31,8 @@ Android Networking
 The Android SDK enables applications to perform network operations, but with some constraints.
 
 Network requests must be made off the main UI thread, and the application manifest must include these permissions:
-
 ::
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
