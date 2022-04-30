@@ -24,11 +24,11 @@
     <string name="title_activity_chat">Chat</string>
     <string name="title_activity_map">Locations</string>
     <string name="title_activity_fetch_address_intent_service">FetchAddressIntentService</string>
-    <string name="title_activity_movie">Movie Details</string>
+    <string name="title_movie_detail">Movie Details</string>
     <string name="title_activity_firebase">AD340 Team</string>
     <string name="saved_text_entry">text_entry</string>
     <string name="title_activity_traffic_cam_map">Traffic Cam Map</string>
-    <string name="title_activity_movie_list">Zombie Movies</string>
+    <string name="title_activity_movies">Movies</string>
     <string name="title_activity_traffic_cam">Traffic Cameras (Kt)</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
@@ -48,4 +48,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

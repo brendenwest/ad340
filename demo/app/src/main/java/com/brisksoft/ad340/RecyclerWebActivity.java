@@ -28,8 +28,6 @@ import java.util.List;
 
 import com.squareup.picasso.Picasso;
 
-import com.brisksoft.ad340.R;
-
 public class RecyclerWebActivity extends AppCompatActivity {
 
     Context context;
@@ -42,7 +40,7 @@ public class RecyclerWebActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler);
+        setContentView(R.layout.fragment_movie_list2);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -50,7 +48,7 @@ public class RecyclerWebActivity extends AppCompatActivity {
 
         context = getApplicationContext();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview1);
+        recyclerView = (RecyclerView) findViewById(R.id.imageList);
         recylerViewLayoutManager = new LinearLayoutManager(context);
 
         // use a linear layout manager

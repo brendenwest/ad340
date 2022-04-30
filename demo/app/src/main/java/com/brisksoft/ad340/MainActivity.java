@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
             return 0;
         }
 
-        // create a new ImageView for each item referenced by the Adapter
+        // create a new ButtonView for each item referenced by the Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
             Button button;
             if (convertView == null) {
@@ -298,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case 1:
-                    intent = new Intent(getBaseContext(), MovieListActivity.class);
+                    intent = new Intent(getBaseContext(), MoviesActivity.class);
                     startActivity(intent);
                     break;
                 case 2:

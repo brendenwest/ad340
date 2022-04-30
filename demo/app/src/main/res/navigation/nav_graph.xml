@@ -2,27 +2,30 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/movieList2"
+    android:id="@+id/nav_graph">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.brisksoft.ad340.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        android:id="@+id/movieList1"
+        android:name="com.brisksoft.ad340.MovieList"
+        android:label="@string/title_activity_movies"
+        tools:layout="@layout/fragment_movie_list1" >
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_movieList1_to_movieDetail"
+            app:destination="@id/movieDetail" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.brisksoft.ad340.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+        android:id="@+id/movieList2"
+        android:name="com.brisksoft.ad340.MovieList"
+        android:label="@string/title_activity_movies"
+        tools:layout="@layout/fragment_movie_list2" >
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_movieList2_to_movieDetail"
+            app:destination="@id/movieDetail" />
     </fragment>
+    <fragment
+        android:id="@+id/movieDetail"
+        android:name="com.brisksoft.ad340.MovieDetail"
+        android:label="@string/title_movie_detail"
+        tools:layout="@layout/fragment_movie_detail" />
 </navigation>

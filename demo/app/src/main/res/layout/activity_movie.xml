@@ -8,6 +8,6 @@
 
     <include layout="@layout/toolbar" />
 
-    <include layout="@layout/content_movie" />
+    <include layout="@layout/fragment_movie_detail" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

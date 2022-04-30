@@ -17,8 +17,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
-import com.brisksoft.ad340.R;
-
 public class RecyclerActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.brisksoft.ad340.MESSAGE";
@@ -34,7 +32,7 @@ public class RecyclerActivity extends AppCompatActivity {
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler);
+        setContentView(R.layout.fragment_movie_list2);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -42,7 +40,7 @@ public class RecyclerActivity extends AppCompatActivity {
 
         context = getApplicationContext();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview1);
+        recyclerView = (RecyclerView) findViewById(R.id.imageList);
         recylerViewLayoutManager = new LinearLayoutManager(context);
 
         // use a linear layout manager
@@ -54,11 +52,11 @@ public class RecyclerActivity extends AppCompatActivity {
     }
 
     public void showMovie(int index) {
-        Intent intent = new Intent(this, MovieActivity.class);
-        Bundle b=new Bundle();
-        b.putStringArray(EXTRA_MESSAGE, movies[index]);
-        intent.putExtras(b);
-        startActivity(intent);
+//        Intent intent = new Intent(this, MovieActivity.class);
+//        Bundle b=new Bundle();
+//        b.putStringArray(EXTRA_MESSAGE, movies[index]);
+//        intent.putExtras(b);
+//        startActivity(intent);
     }
 
     public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
@@ -87,7 +85,7 @@ public class RecyclerActivity extends AppCompatActivity {
         public CustomAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
 
             // Inflate the view for this view holder
-            View item = getLayoutInflater().inflate(R.layout.movie_list_row_layout, parent,
+            View item = getLayoutInflater().inflate(R.layout.movie_list_item, parent,
                     false);
 
             // Call the view holder's constructor, and pass the view to it;

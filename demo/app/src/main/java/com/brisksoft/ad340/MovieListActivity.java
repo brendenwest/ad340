@@ -20,8 +20,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
-import com.brisksoft.ad340.R;
-
 public class MovieListActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.brisksoft.ad340.MESSAGE";
@@ -45,11 +43,11 @@ public class MovieListActivity extends AppCompatActivity {
     }
 
     private void showMovie(int index) {
-        Intent intent = new Intent(this, MovieActivity.class);
-        Bundle b=new Bundle();
-        b.putStringArray(EXTRA_MESSAGE, movies[index]);
-        intent.putExtras(b);
-        startActivity(intent);
+//        Intent intent = new Intent(this, MovieActivity.class);
+//        Bundle b=new Bundle();
+//        b.putStringArray(EXTRA_MESSAGE, movies[index]);
+//        intent.putExtras(b);
+//        startActivity(intent);
     }
 
     public class MovieListAdapter extends ArrayAdapter<String[]> {
@@ -66,7 +64,7 @@ public class MovieListActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View rowView = inflater.inflate(R.layout.movie_list_row_layout, parent, false);
+            View rowView = inflater.inflate(R.layout.movie_list_item, parent, false);
             TextView movieTitle = rowView.findViewById(R.id.movieTitle);
             TextView movieYear = rowView.findViewById(R.id.movieYear);
             ImageView imageView = rowView.findViewById(R.id.movieImage);
