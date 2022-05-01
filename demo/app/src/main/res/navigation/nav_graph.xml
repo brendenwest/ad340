@@ -2,12 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/movieList2"
+    app:startDestination="@id/movieList1"
     android:id="@+id/nav_graph">
 
     <fragment
         android:id="@+id/movieList1"
-        android:name="com.brisksoft.ad340.MovieList"
+        android:name="com.brisksoft.ad340.MovieList1"
         android:label="@string/title_activity_movies"
         tools:layout="@layout/fragment_movie_list1" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieList2"
-        android:name="com.brisksoft.ad340.MovieList"
+        android:name="com.brisksoft.ad340.MovieList2"
         android:label="@string/title_activity_movies"
         tools:layout="@layout/fragment_movie_list2" >
         <action

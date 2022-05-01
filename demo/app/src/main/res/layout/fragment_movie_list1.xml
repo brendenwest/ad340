@@ -7,7 +7,7 @@
     tools:context=".MoviesActivity">
 
     <ListView
-        android:id="@+id/movieList"
+        android:id="@+id/imageList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"

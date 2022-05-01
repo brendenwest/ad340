@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                         switch (menuItem.getItemId()) {
                             case R.id.nav_movies:
                                 Log.d(TAG, menuItem.toString());
-                                intent = new Intent(MainActivity.this, RecyclerActivity.class);
+                                intent = new Intent(MainActivity.this, MoviesActivity.class);
                                 startActivity(intent);
                                 break;
                             case R.id.nav_map:
@@ -302,7 +302,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case 2:
-                    intent = new Intent(getBaseContext(), RecyclerActivity.class);
+                    intent = new Intent(getBaseContext(), MoviesActivity.class);
+                    intent.putExtra("fragment", "movies2");
                     startActivity(intent);
                     break;
                 case 3:
