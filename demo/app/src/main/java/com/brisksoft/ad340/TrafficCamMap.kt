@@ -1,5 +1,6 @@
 package com.brisksoft.ad340
 
+import android.Manifest
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.pm.PackageManager
 import android.location.Location
@@ -11,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.brisksoft.ad340.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
@@ -38,7 +38,6 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
     private var map: GoogleMap? = null
     private val defaultLocation = Location(LocationManager.GPS_PROVIDER)
     private var locationPermissionGranted = false
-    private var lastKnownLocation: Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,15 +64,9 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
         if ( ContextCompat.checkSelfPermission(this@TrafficCamMap, ACCESS_FINE_LOCATION) ==
             PackageManager.PERMISSION_GRANTED) {
             Log.d("LOCATION", "already granted")
+            locationPermissionGranted = true
             // Permission is already available. Get user's location
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location : Location? ->
-                    // Got last known location. In some rare situations this can be null.
-                    Log.d("LOCATION", location.toString())
-
-                    updateMap(location)
-                }
-
+            getDeviceLocation()
         } else {
             // Permission is missing and must be requested.
             Log.d("LOCATION", "should request")
@@ -95,18 +88,32 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_REQUEST_LOCATION) {
             // Request for camera permission.
             if (grantResults.size == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission has been granted. Start camera preview Activity.
                 Log.d("LOCATION", "granted")
                 Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
-                fusedLocationClient.lastLocation
-                    .addOnSuccessListener { location : Location? ->
-                        // Got last known location. In some rare situations this can be null.
-                        locationPermissionGranted = true
-                        updateMap(location)
-                    }
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return
+                }
+                locationPermissionGranted = true
+                getDeviceLocation()
 
             } else {
                 // Permission request was denied.
@@ -126,20 +133,12 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
          */
         try {
             if (locationPermissionGranted) {
-                val locationResult = fusedLocationClient.lastLocation
-                locationResult.addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Set the map's camera position to the current location of the device.
-                        lastKnownLocation = task.result
-                        updateMap(lastKnownLocation)
-
-                    } else {
-                        Log.d(TAG, "Current location is null. Using defaults.")
-                        Log.e(TAG, "Exception: %s", task.exception)
-                        updateMap(defaultLocation)
-                        map?.uiSettings?.isMyLocationButtonEnabled = false
+                Log.e("LOCATION", " getDeviceLocation")
+                fusedLocationClient.lastLocation
+                    .addOnSuccessListener { location : Location? ->
+                        Log.d("LOCATION", "success. Current location is " + location.toString())
+                        updateMap(location)
                     }
-                }
             }
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message, e)
@@ -150,8 +149,8 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
     private fun updateMap(location: Location?) {
         Log.d("LOCATION", "updateMap")
         if (location != null) {
-            Log.d("LOCATION", "move map")
-            map?.setMinZoomPreference(12f) // zoom to city level
+            Log.d("LOCATION", "move map to $location")
+            map?.setMinZoomPreference(13f) // zoom to city level
             map?.apply {
                 val position = LatLng(location.latitude, location.longitude)
                 addMarker(
@@ -163,6 +162,10 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
                 // [START_EXCLUDE silent]
                 moveCamera(CameraUpdateFactory.newLatLng(position))
                 // [END_EXCLUDE]
+            }
+            // load markers data
+            TrafficCam.loadCameraData(applicationContext) { data ->
+                showMarkers(data)
             }
         }
     }
@@ -194,18 +197,11 @@ class TrafficCamMap : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         // store map object for use once location is available
         map = googleMap
-        Log.d("LOCATION", "has map")
+        Log.d("LOCATION", "map ready")
 
         // check for user's location
         checkLocationPermission()
 
-        // Get the current location of the device and set the position of the map.
-        getDeviceLocation()
-
-        // load markers data
-        TrafficCam.loadCameraData(applicationContext) { data ->
-            showMarkers(data)
-        }
     }
 
     companion object {
