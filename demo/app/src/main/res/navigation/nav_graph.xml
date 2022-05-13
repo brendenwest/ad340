@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/movieList1"
         android:name="com.brisksoft.ad340.MovieList1"
-        android:label="@string/title_activity_movies"
+        android:label="@string/title_activity_movies1"
         tools:layout="@layout/fragment_movie_list1" >
         <action
             android:id="@+id/action_movieList1_to_movieDetail"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/movieList2"
         android:name="com.brisksoft.ad340.MovieList2"
-        android:label="@string/title_activity_movies"
+        android:label="@string/title_activity_movies2"
         tools:layout="@layout/fragment_movie_list2" >
         <action
             android:id="@+id/action_movieList2_to_movieDetail"

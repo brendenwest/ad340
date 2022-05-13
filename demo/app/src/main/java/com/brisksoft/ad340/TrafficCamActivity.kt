@@ -10,7 +10,6 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.brisksoft.ad340.R
 import com.squareup.picasso.Picasso
 
 class TrafficCamActivity : AppCompatActivity() {

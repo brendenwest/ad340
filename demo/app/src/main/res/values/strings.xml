@@ -28,7 +28,8 @@
     <string name="title_activity_firebase">AD340 Team</string>
     <string name="saved_text_entry">text_entry</string>
     <string name="title_activity_traffic_cam_map">Traffic Cam Map</string>
-    <string name="title_activity_movies">Movies</string>
+    <string name="title_activity_movies1">Movies w/ ListView</string>
+    <string name="title_activity_movies2">Movies w/ RecyclerView</string>
     <string name="title_activity_traffic_cam">Traffic Cameras (Kt)</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>

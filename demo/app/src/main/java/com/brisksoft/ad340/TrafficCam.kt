@@ -20,7 +20,7 @@ data class TrafficCam(val description: String, private val image: String, var ty
     }
 
     companion object {
-        var dataUrl = " https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2"
+        var dataUrl = "https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2"
 
         /**
          * Loads camera data
