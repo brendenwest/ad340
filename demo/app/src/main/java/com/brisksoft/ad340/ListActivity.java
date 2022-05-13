@@ -9,6 +9,8 @@ import android.widget.ListView;
 
 import com.brisksoft.ad340.R;
 
+import java.util.Objects;
+
 public class ListActivity extends AppCompatActivity {
     // Array of strings
     String[] demoArray = {"Seattle", "Spokane","Tacoma","Vancouver", "Walla Walla", "Yakima" };
@@ -20,7 +22,7 @@ public class ListActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         ArrayAdapter adapter = new ArrayAdapter<>(this,
                 R.layout.list_item, demoArray);
