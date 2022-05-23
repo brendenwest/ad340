@@ -1,5 +1,6 @@
+=======
 React Native
-====
+=======
 
 Reading
 ----
@@ -14,7 +15,6 @@ JavaScript Reference
 - https://www.tutorialspoint.com/javascript/index.htm
 - https://codeburst.io/es6-tutorial-for-beginners-5f3c4e7960be
 
-
 Learning Outcomes
 ----
 - React web development
@@ -24,7 +24,6 @@ Learning Outcomes
 - Networking in RN
 - Platform-specific RN features
 - Integration with existing native mobile applications
-
 
 Overview
 ----
@@ -44,6 +43,7 @@ Expo
 - does not require installation of Android Studio or XCode
 - does not support full capabilities of native SDK's (e.g. push notifications)
 - lacks support for some 3rd party plugins (e.g. Facebook integration)
+
 
 Native CLI
 ^^^^
@@ -65,8 +65,7 @@ Development Notes
 ----
 The initialization step creates a project structure with android and ios folders, but much of your application code lives outside those folders in the App.js file & any supporting JavaScript files you might create.
 
-.. image:: ../images/react_project_structure.png
-  :width: 490
+.. image:: react_project_structure.png
 
 You can open the 'android' folder via Android Studio as you would any Android project.
 
@@ -74,11 +73,11 @@ Because React Native application code mostly lives outside the platform-specific
 
 One approach is to first start an Android Studio emulator, then start up React Native's Metro Bundler using the 'react-native run-android' command. This command starts the Metro Bundler as a node.js web server on your local computer and generates an Android bundle file.
 
-.. image:: ../images/react_metro_bundler.png
-  :width: 490
+.. image:: react_metro_bundler.png
+    :width: 490
 
-  With no emulator running, you'll see a command-line error like this:
-  ::
+With no emulator running, you'll see a command-line error like this:
+::
 
     BUILD FAILED in 2s
     27 actionable tasks: 1 executed, 26 up-to-date
@@ -91,24 +90,25 @@ With emulator & Metro Bundler running, you can edit App.js and reload into the e
 
 The Metro Bundler window will display React rendering errors, if any:
 
-.. image:: ../images/react_metro_error.png
-  :width: 490
+.. image:: react_metro_error.png
+    :width: 490
 
 You can also view React Native debug information, including results of JavaScript console.log() commands, in Android Studio's logcat:
 
-.. image:: ../images/react_native_debug.png
-  :width: 490
+.. image:: react_native_debug.png
+    :width: 490
 
 React -v- React Native
-____
-
+----
 React Native overlaps significantly with React:
+
 - Based on JavaScript
 - Use declarative syntax (JSX), components, and props to control application UI
 - Use Class components or Hooks to maintain state
 - Support other web technologies (e.g. CSS)
 
-However, React Native has significant differences that allow it to integrate with iOS and Android native SDK's.
+However, React Native has significant differences that allow it to integrate with iOS and Android native SDK's.:
+
 - Requires platform IDE (or Expo) to compile app
 - Has a **core** set of UI components corresponding to native UI components, built to support touch interaction and variable screen size/density
 - Can use platform-specific native components
