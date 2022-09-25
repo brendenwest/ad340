@@ -14,6 +14,7 @@ import java.io.IOException
 import java.util.*
 
 class FetchAddressIntentService : IntentService("FetchAddressIntentService") {
+    @Deprecated("Deprecated in Java")
     override fun onCreate() {
         super.onCreate()
     }
@@ -26,6 +27,7 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentService") {
         receiver?.send(resultCode, bundle)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onHandleIntent(intent: Intent?) {
         val geocoder = Geocoder(this, Locale.getDefault())
 
@@ -40,7 +42,7 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentService") {
             Constants.LOCATION_DATA_EXTRA
         )
 
-        var addresses: List<Address> = emptyList()
+        var addresses: List<Address>? = emptyList()
 
         try {
             addresses = geocoder.getFromLocation(
@@ -60,7 +62,7 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentService") {
         }
 
         // Handle case where no address was found.
-        if (addresses.isEmpty()) {
+        if (addresses!!.isEmpty()) {
             if (errorMessage.isEmpty()) {
                 errorMessage = getString(R.string.no_address_found)
                 Log.e(TAG, errorMessage)

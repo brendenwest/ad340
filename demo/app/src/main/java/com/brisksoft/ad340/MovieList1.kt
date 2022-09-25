@@ -44,17 +44,15 @@ class MovieList1 : Fragment() {
         ArrayAdapter<Array<String>>(context,0, movies) {
 
         override fun getView(position: Int, view: View?, parent: ViewGroup): View {
-            var itemView = view
-            if (itemView == null) {
-                itemView = LayoutInflater.from(context)
-                .inflate(R.layout.movie_list_item, parent, false)
-            }
+            val itemView = view
+                ?: LayoutInflater.from(context)
+                    .inflate(R.layout.movie_list_item, parent, false)
 
-            itemView!!.findViewById<TextView>(R.id.movieTitle).text = movies[position][0]
-            itemView!!.findViewById<TextView>(R.id.movieYear).text = movies[position][1]
-            val imageView = itemView!!.findViewById<ImageView>(R.id.movieImage)
-            Picasso.get().setIndicatorsEnabled(true);
-            Picasso.get().load(movies[position][3]).into(imageView);
+            itemView.findViewById<TextView>(R.id.movieTitle).text = movies[position][0]
+            itemView.findViewById<TextView>(R.id.movieYear).text = movies[position][1]
+            val imageView = itemView.findViewById<ImageView>(R.id.movieImage)
+            Picasso.get().setIndicatorsEnabled(true)
+            Picasso.get().load(movies[position][3]).into(imageView)
 
             itemView.setOnClickListener {
                 val bundle = bundleOf( "movie" to movies[position])
