@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize"
-    tools:context="com.brisksoft.ad340.com.brisksoft.ad340.MainActivity"
+    tools:context="com.brisksoft.ad340.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <LinearLayout

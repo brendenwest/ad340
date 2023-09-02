@@ -1,4 +1,4 @@
-package brisksoft.com.myapplication;
+package com.brisksoft.ad340;
 
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -12,7 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import android.content.SharedPreferences;
 
-import brisksoft.com.ad340.SharedPreferencesHelper;
+import com.brisksoft.ad340.SharedPreferencesHelper;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SharedPreferencesUnitTest {

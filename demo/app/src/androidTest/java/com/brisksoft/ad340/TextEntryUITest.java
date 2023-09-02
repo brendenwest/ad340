@@ -1,4 +1,4 @@
-package brisksoft.com.myapplication;
+package com.brisksoft.ad340;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -7,8 +7,8 @@ import org.junit.runner.RunWith;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import brisksoft.com.ad340.MainActivity;
-import brisksoft.com.ad340.R;
+import com.brisksoft.ad340.MainActivity;
+import com.brisksoft.ad340.R;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;

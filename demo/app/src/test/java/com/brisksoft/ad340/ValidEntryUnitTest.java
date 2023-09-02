@@ -1,10 +1,10 @@
-package brisksoft.com.myapplication;
+package com.brisksoft.ad340;
 
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
-import brisksoft.com.ad340.MainActivity;
+import com.brisksoft.ad340.MainActivity;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

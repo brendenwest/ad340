@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.brisksoft.ad340.com.brisksoft.ad340.ListActivity"
+    tools:context="com.brisksoft.ad340.ListActivity"
     tools:showIn="@layout/activity_list">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
